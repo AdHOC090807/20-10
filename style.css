@@ -1,0 +1,321 @@
+/* style.css - Custom luxury styling for 20/10 celebration */
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap');
+
+:root {
+    --primary-rose: #ff3366;
+    --primary-pink: #ff758c;
+    --gold: #ffd700;
+    --dark-bg: #140713;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background-color: var(--dark-bg);
+    color: #fff;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.font-serif-luxury {
+    font-family: 'Playfair Display', serif;
+}
+
+.font-handwriting {
+    font-family: 'Dancing Script', cursive;
+}
+
+/* Background Atmospheric Glows */
+.bg-glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 200, 220, 0.15);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 117, 140, 0.45);
+    box-shadow: 0 16px 36px -10px rgba(255, 51, 102, 0.3);
+}
+
+/* Golden text gradient */
+.text-gold-gradient {
+    background: linear-gradient(135deg, #fff275 0%, #ffd700 40%, #ffae19 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-rose-gradient {
+    background: linear-gradient(135deg, #ffffff 0%, #ffb6c1 30%, #ff4b72 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Interactive Click Sparkle */
+.click-sparkle-float {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    font-size: 1.4rem;
+    animation: sparkleFly 0.85s cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes sparkleFly {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.6);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.3);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--dx) * 1.3), calc(-50% + var(--dy) * 1.3 - 25px)) scale(0.4);
+    }
+}
+
+/* Music Wave Equalizer */
+.equalizer-bar {
+    width: 3px;
+    height: 14px;
+    background-color: #ff758c;
+    border-radius: 2px;
+    animation: eqPulse 1s ease-in-out infinite alternate;
+}
+.equalizer-bar:nth-child(1) { animation-delay: 0.1s; height: 8px; }
+.equalizer-bar:nth-child(2) { animation-delay: 0.3s; height: 16px; }
+.equalizer-bar:nth-child(3) { animation-delay: 0.5s; height: 11px; }
+
+@keyframes eqPulse {
+    0% { transform: scaleY(0.3); }
+    100% { transform: scaleY(1.3); }
+}
+
+/* Button Active Glow */
+.active-glow {
+    box-shadow: 0 0 25px rgba(255, 75, 114, 0.8), 0 0 50px rgba(255, 215, 0, 0.4) !important;
+    animation: pulseGlow 1.5s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.03); }
+}
+
+/* Modal recipient & wall filter active tabs */
+.active-tab {
+    background: linear-gradient(135deg, #ff3366 0%, #e11d48 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4) !important;
+    border-color: rgba(255, 117, 140, 0.6) !important;
+}
+
+/* ===================================================
+   3D ENVELOPE & LETTER UNFOLDING ANIMATION
+=================================================== */
+.envelope-container {
+    perspective: 1200px;
+    width: 100%;
+    max-width: 580px;
+    min-height: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.envelope-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 310px;
+    background: #c2185b;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 51, 102, 0.3);
+    transition: transform 0.6s ease;
+}
+
+/* Pocket Flaps */
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 160px;
+    background: linear-gradient(180deg, #ad1457 0%, #880e4f 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s 0.2s;
+    z-index: 30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 25px;
+}
+
+.wax-seal {
+    width: 62px;
+    height: 62px;
+    background: radial-gradient(circle at 35% 35%, #ffd700, #b45309, #78350f);
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    z-index: 35;
+}
+
+.wax-seal:hover {
+    transform: scale(1.08) rotate(5deg);
+    box-shadow: 0 6px 18px rgba(255, 215, 0, 0.6);
+}
+
+.envelope-pocket {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(135deg, #d81b60 0%, #ad1457 100%);
+    clip-path: polygon(0 0, 50% 48%, 100% 0, 100% 100%, 0 100%);
+    border-radius: 0 0 12px 12px;
+    z-index: 25;
+    pointer-events: none;
+}
+
+/* The Letter Inside */
+.letter-sheet {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 25px;
+    background: #fffdfa;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    padding: 24px;
+    color: #2b1d24;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.2s;
+    z-index: 10;
+    transform: translateY(0);
+    max-height: 260px;
+    overflow: hidden;
+    border: 1px solid rgba(220, 180, 150, 0.3);
+}
+
+/* Open State */
+.envelope-wrapper.is-open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 5;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.2s 0.3s;
+}
+
+.envelope-wrapper.is-open .wax-seal {
+    display: none;
+}
+
+.envelope-wrapper.is-open .letter-sheet {
+    transform: translateY(-130px) scale(1.04);
+    z-index: 40;
+    max-height: 480px;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 117, 140, 0.4);
+}
+
+/* Letter Vintage Styling */
+.parchment-border {
+    border: 1px dashed #d4af37;
+    position: relative;
+}
+
+/* Custom Scrollbar */
+.letter-sheet::-webkit-scrollbar {
+    width: 5px;
+}
+.letter-sheet::-webkit-scrollbar-thumb {
+    background: #e2b4be;
+    border-radius: 4px;
+}
+
+/* Bouquet Visualization */
+.bouquet-wrapper {
+    position: relative;
+    width: 200px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.flower-bouquet-item {
+    position: absolute;
+    bottom: 50px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    0% { transform: scale(0) translateY(20px); opacity: 0; }
+    80% { transform: scale(1.15) translateY(-5px); opacity: 1; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+.animate-pop-in {
+    animation: popIn 0.4s forwards;
+}
+
+@keyframes scaleUp {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.animate-scale-up {
+    animation: scaleUp 0.35s ease forwards;
+}
+
+/* Subtle continuous pulse for gift box */
+@keyframes bounceSlow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+.animate-bounce-slow {
+    animation: bounceSlow 2.5s ease-in-out infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .envelope-wrapper {
+        height: 270px;
+    }
+    .envelope-wrapper.is-open .letter-sheet {
+        transform: translateY(-90px) scale(1.02);
+        left: 8px;
+        right: 8px;
+        padding: 16px;
+    }
+}

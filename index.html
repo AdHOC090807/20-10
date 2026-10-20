@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10 - Tri Ân & Yêu Thương</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌹</text></svg>">
+</head>
+<body class="bg-[#120512] text-slate-100 selection:bg-rose-500 selection:text-white relative min-h-screen">
+
+    <!-- Atmospheric Glowing Background Orbs -->
+    <div class="bg-glow-orb w-[500px] h-[500px] bg-rose-600/20 -top-40 -left-40"></div>
+    <div class="bg-glow-orb w-[600px] h-[600px] bg-pink-500/15 top-1/3 -right-48"></div>
+    <div class="bg-glow-orb w-[550px] h-[550px] bg-purple-600/20 bottom-20 left-1/4"></div>
+
+    <!-- Background Canvas: Fireworks & Falling Rose Petals -->
+    <canvas id="fireworks-canvas" class="fixed inset-0 pointer-events-none z-40"></canvas>
+    <canvas id="petals-canvas" class="fixed inset-0 pointer-events-none z-10"></canvas>
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-30 glass-panel border-b border-rose-500/20 py-3 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl animate-pulse">🌹</span>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-lg sm:text-xl font-bold font-serif-luxury tracking-wide text-rose-gradient">
+                            20.10 • PHỤ NỮ VIỆT NAM
+                        </h1>
+                        <!-- Backend status badge -->
+                        <span id="backend-status-badge" class="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                            <span>Full-Stack Live</span>
+                        </span>
+                    </div>
+                    <p class="text-[11px] text-rose-200/70 hidden sm:block">Trao trọn yêu thương đến người phụ nữ tuyệt vời</p>
+                </div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Music Player Indicator -->
+                <button id="music-toggle-btn" class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-rose-600 text-white border border-rose-400/30 text-xs sm:text-sm font-medium transition-all active:scale-95 shadow-sm" title="Nhấp để Tạm dừng / Phát tiếp">
+                    <span class="text-base">🎵</span>
+                    <span id="music-status-text">Đang Phát Nhạc</span>
+                    <!-- Equalizer Wave -->
+                    <div id="music-wave" class="flex items-end gap-0.5 transition-opacity">
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                        <div class="equalizer-bar"></div>
+                    </div>
+                </button>
+
+                <!-- Fullscreen Fireworks Celebration -->
+                <button id="firework-show-btn" class="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white text-xs sm:text-sm font-semibold transition-all shadow-lg shadow-rose-500/30 active:scale-95">
+                    <span>🎆 Đại Tiệc Pháo Hoa</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24 space-y-16 sm:space-y-24">
+
+        <!-- HERO SECTION -->
+        <section class="text-center pt-6 pb-4 sm:pt-10 sm:pb-6 relative">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-400/30 text-rose-300 text-xs sm:text-sm font-medium mb-6 shadow-inner backdrop-blur-md">
+                <span>✨</span>
+                <span>Ngày Phụ Nữ Việt Nam 20 Tháng 10</span>
+                <span>✨</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h2 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-serif-luxury leading-tight max-w-4xl mx-auto mb-6 text-rose-gradient">
+                Gửi Trọn Yêu Thương Đến <br class="hidden sm:inline">
+                <span class="text-gold-gradient">Những Người Phụ Nữ Tuyệt Vời Nhất</span>
+            </h2>
+
+            <p class="text-base sm:text-lg text-rose-100/80 max-w-2xl mx-auto mb-6 font-light leading-relaxed">
+                Một ngày thiêng liêng để bày tỏ lòng biết ơn vô hạn và sự nâng niu sâu sắc nhất đến 
+                <strong class="text-amber-300 font-semibold">Bà</strong>, 
+                <strong class="text-rose-400 font-semibold">Mẹ</strong> và 
+                <strong class="text-pink-300 font-semibold">Em gái</strong> — những người thắp sáng ấm áp cho cuộc đời chúng ta.
+            </p>
+
+            <!-- Live Backend Stats Bar -->
+            <div class="max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-3 text-center my-6">
+                <div class="glass-panel p-3 rounded-2xl border border-rose-500/20 shadow-md">
+                    <div class="text-xl sm:text-2xl font-bold text-rose-400" id="stat-wishes">0</div>
+                    <div class="text-[11px] text-rose-200/70 font-medium">💌 Lời chúc đã trao</div>
+                </div>
+                <div class="glass-panel p-3 rounded-2xl border border-amber-500/20 shadow-md">
+                    <div class="text-xl sm:text-2xl font-bold text-amber-400" id="stat-fireworks">0</div>
+                    <div class="text-[11px] text-rose-200/70 font-medium">🎆 Pháo hoa thắp sáng</div>
+                </div>
+                <div class="glass-panel p-3 rounded-2xl border border-pink-500/20 shadow-md">
+                    <div class="text-xl sm:text-2xl font-bold text-pink-400" id="stat-bouquets">0</div>
+                    <div class="text-[11px] text-rose-200/70 font-medium">💐 Bó hoa gửi tặng</div>
+                </div>
+                <div class="glass-panel p-3 rounded-2xl border border-red-500/20 shadow-md">
+                    <div class="text-xl sm:text-2xl font-bold text-red-400" id="stat-hearts">0</div>
+                    <div class="text-[11px] text-rose-200/70 font-medium">💖 Trái tim yêu thương</div>
+                </div>
+            </div>
+
+            <!-- Quick Navigation Pills -->
+            <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-2xl mx-auto mt-6">
+                <a href="#section-ba" class="px-4 py-2 rounded-full glass-card hover:border-amber-400/80 text-amber-200 text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5">
+                    <span class="text-base">👵</span> Kính Chúc Bà
+                </a>
+                <a href="#section-me" class="px-4 py-2 rounded-full bg-rose-600/40 hover:bg-rose-600/70 border border-rose-400/80 text-white text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 shadow-lg shadow-rose-600/20">
+                    <span class="text-base">👩‍🦰</span> Kính Chúc Mẹ
+                </a>
+                <a href="#section-emgai" class="px-4 py-2 rounded-full glass-card hover:border-pink-400/80 text-pink-200 text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5">
+                    <span class="text-base">👧</span> Chúc Em Gái
+                </a>
+                <a href="#section-wall" class="px-4 py-2 rounded-full glass-card hover:border-rose-400/80 text-rose-200 text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5">
+                    <span class="text-base">📜</span> Sổ Lưu Bút
+                </a>
+                <a href="#section-bouquet" class="px-4 py-2 rounded-full glass-card hover:border-purple-400/80 text-purple-200 text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5">
+                    <span class="text-base">💐</span> Cắm Hoa 20/10
+                </a>
+            </div>
+
+            <!-- Hint text -->
+            <div class="mt-5 text-xs text-rose-300/60 flex items-center justify-center gap-1">
+                <span>💡</span> Nhấp chuột bất kỳ đâu trên màn hình để bắn hoa & tim rực rỡ!
+            </div>
+        </section>
+
+        <!-- CORE SECTION: BA BẾN ĐỖ YÊU THƯƠNG (Bà, Mẹ, Em Gái) -->
+        <section class="space-y-8">
+            <div class="text-center">
+                <h3 class="text-2xl sm:text-3xl font-bold font-serif-luxury text-white">
+                    🌹 Ba Bến Đỗ Yêu Thương & Tri Ân
+                </h3>
+                <p class="text-sm text-rose-200/70 mt-2">Nhấp vào từng thiệp để mở bức thư tay xúc động hoặc gửi pháo hoa riêng</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+                
+                <!-- CARD 1: BÀ KÍNH YÊU -->
+                <div id="section-ba" class="glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between border-amber-500/30 hover:border-amber-400 relative overflow-hidden group">
+                    <div class="absolute -top-16 -right-16 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                    <div>
+                        <!-- Header badge -->
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold border border-amber-400/30">
+                                👵 Kính Yêu & Trường Thọ
+                            </span>
+                            <span class="text-3xl">🕊️</span>
+                        </div>
+
+                        <!-- Title -->
+                        <h4 class="text-xl sm:text-2xl font-bold font-serif-luxury text-amber-100 mb-2">
+                            Kính Chúc Bà Yêu
+                        </h4>
+                        <p class="text-xs sm:text-sm text-amber-200/70 italic mb-4 leading-relaxed font-serif">
+                            "Bàn tay ấm áp chở che tháng ngày, câu chuyện cổ tích nuôi lớn tuổi thơ con."
+                        </p>
+
+                        <!-- Actions -->
+                        <div class="grid grid-cols-2 gap-2.5 mb-6">
+                            <button id="btn-open-letter-ba" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95">
+                                <span>💌</span> Mở Thư Chúc
+                            </button>
+                            <button id="btn-tribute-ba" class="w-full py-2.5 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-200 font-medium text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all active:scale-95">
+                                <span>🎆</span> Bắn Pháo Hoa
+                            </button>
+                        </div>
+
+                        <!-- Curated Wishes Section -->
+                        <div class="space-y-2.5">
+                            <div class="text-xs font-semibold text-amber-300 uppercase tracking-wider flex items-center gap-1">
+                                <span>✨</span> Lời chúc chọn lọc kính Bà:
+                            </div>
+                            <div id="wishes-list-ba" class="space-y-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: MẸ YÊU DẤU (Centerpiece / Crown Glow) -->
+                <div id="section-me" class="glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between border-rose-500/50 hover:border-rose-400 relative overflow-hidden group shadow-2xl shadow-rose-900/30 lg:-translate-y-3">
+                    <!-- Glow highlight -->
+                    <div class="absolute -top-16 -right-16 w-44 h-44 bg-rose-600/25 rounded-full blur-2xl pointer-events-none"></div>
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-500 via-pink-400 to-rose-500"></div>
+
+                    <div>
+                        <!-- Header badge -->
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3.5 py-1 rounded-full bg-rose-500/30 text-rose-200 text-xs font-bold border border-rose-400/50 flex items-center gap-1.5">
+                                <span>👑</span> Mẹ Tuyệt Vời Nhất
+                            </span>
+                            <span class="text-3xl animate-bounce-slow">🌹</span>
+                        </div>
+
+                        <!-- Title -->
+                        <h4 class="text-2xl sm:text-3xl font-extrabold font-serif-luxury text-rose-gradient mb-2">
+                            Kính Chúc Mẹ Yêu
+                        </h4>
+                        <p class="text-xs sm:text-sm text-rose-200/80 italic mb-4 leading-relaxed font-serif">
+                            "Đi khắp thế gian không ai tốt bằng Mẹ. Vòng tay Mẹ là chốn về bình yên nhất của đời con."
+                        </p>
+
+                        <!-- Actions -->
+                        <div class="grid grid-cols-2 gap-2.5 mb-6">
+                            <button id="btn-open-letter-me" class="w-full py-3 px-3 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all shadow-lg shadow-rose-600/30 active:scale-95">
+                                <span>💌</span> Mở Thư Chúc Mẹ
+                            </button>
+                            <button id="btn-tribute-me" class="w-full py-3 px-3 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 border border-rose-400/50 text-rose-100 font-semibold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all active:scale-95">
+                                <span>🎆</span> Bắn Pháo Hoa Tặng
+                            </button>
+                        </div>
+
+                        <!-- Curated Wishes Section -->
+                        <div class="space-y-2.5">
+                            <div class="text-xs font-semibold text-rose-300 uppercase tracking-wider flex items-center gap-1">
+                                <span>💖</span> Lời chúc sâu lắng tặng Mẹ:
+                            </div>
+                            <div id="wishes-list-me" class="space-y-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3: EM GÁI ĐÁNG YÊU -->
+                <div id="section-emgai" class="glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between border-pink-500/30 hover:border-pink-400 relative overflow-hidden group">
+                    <div class="absolute -top-16 -right-16 w-36 h-36 bg-pink-500/15 rounded-full blur-2xl pointer-events-none"></div>
+                    <div>
+                        <!-- Header badge -->
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-pink-500/20 text-pink-300 text-xs font-semibold border border-pink-400/30">
+                                👧 Rực Rỡ & Năng Động
+                            </span>
+                            <span class="text-3xl">🎀</span>
+                        </div>
+
+                        <!-- Title -->
+                        <h4 class="text-xl sm:text-2xl font-bold font-serif-luxury text-pink-100 mb-2">
+                            Chúc Em Gái Nhỏ
+                        </h4>
+                        <p class="text-xs sm:text-sm text-pink-200/70 italic mb-4 leading-relaxed font-serif">
+                            "Bông hoa tươi tắn rạng ngời, mang lại ngập tràn tiếng cười và niềm vui cho cả nhà."
+                        </p>
+
+                        <!-- Actions -->
+                        <div class="grid grid-cols-2 gap-2.5 mb-6">
+                            <button id="btn-open-letter-emgai" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-95">
+                                <span>💌</span> Mở Thư Chúc Em
+                            </button>
+                            <button id="btn-tribute-emgai" class="w-full py-2.5 px-3 rounded-xl bg-pink-500/20 hover:bg-pink-500/30 border border-pink-400/40 text-pink-200 font-medium text-xs sm:text-sm flex items-center justify-center gap-1.5 transition-all active:scale-95">
+                                <span>🎆</span> Bắn Pháo Hoa Tặng
+                            </button>
+                        </div>
+
+                        <!-- Curated Wishes Section -->
+                        <div class="space-y-2.5">
+                            <div class="text-xs font-semibold text-pink-300 uppercase tracking-wider flex items-center gap-1">
+                                <span>🌸</span> Lời chúc dễ thương cho Em gái:
+                            </div>
+                            <div id="wishes-list-emgai" class="space-y-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION: SỔ LƯU BÚT & BỨC TƯỜNG YÊU THƯƠNG (FULL-STACK BACKEND POWERED) -->
+        <section id="section-wall" class="glass-card rounded-3xl p-6 sm:p-10 border-rose-500/25 relative overflow-hidden">
+            <div class="text-center max-w-2xl mx-auto mb-8">
+                <span class="text-xs uppercase tracking-widest text-rose-400 font-semibold flex items-center justify-center gap-1.5">
+                    <span>⚡</span> Backend & Database Lưu Trữ Trực Tiếp
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-bold font-serif-luxury text-white mt-1">
+                    📜 Sổ Lưu Bút & Bức Tường Yêu Thương 20/10
+                </h3>
+                <p class="text-xs sm:text-sm text-rose-200/70 mt-2">
+                    Gửi lời chúc yêu thương của bạn lên hệ thống để lưu giữ vĩnh viễn và cùng mọi người thả tim!
+                </p>
+            </div>
+
+            <!-- Filter tabs -->
+            <div class="flex items-center justify-center gap-2 mb-8 flex-wrap">
+                <button class="wall-filter-btn px-4 py-1.5 rounded-full glass-panel active-tab text-xs sm:text-sm font-medium transition-all" data-role="all">
+                    🌸 Tất Cả Lời Chúc
+                </button>
+                <button class="wall-filter-btn px-4 py-1.5 rounded-full glass-panel text-xs sm:text-sm font-medium transition-all" data-role="Bà">
+                    👵 Kính Chúc Bà
+                </button>
+                <button class="wall-filter-btn px-4 py-1.5 rounded-full glass-panel text-xs sm:text-sm font-medium transition-all" data-role="Mẹ">
+                    👩‍🦰 Kính Chúc Mẹ
+                </button>
+                <button class="wall-filter-btn px-4 py-1.5 rounded-full glass-panel text-xs sm:text-sm font-medium transition-all" data-role="Em gái">
+                    👧 Chúc Em Gái
+                </button>
+            </div>
+
+            <!-- Wall Grid: Wishes cards loaded from Backend SQLite DB -->
+            <div id="wall-wishes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                <!-- Injected dynamically by script.js from /api/wishes -->
+                <div class="col-span-full py-12 text-center text-rose-200/50">
+                    <span class="text-2xl animate-spin inline-block">🌹</span>
+                    <p class="mt-2 text-sm">Đang tải bức tường lời chúc từ máy chủ...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: VƯỜN HOA 20/10 - TỰ TAY CẮM HOA TẶNG -->
+        <section id="section-bouquet" class="glass-card rounded-3xl p-6 sm:p-10 border-rose-500/20 relative overflow-hidden">
+            <div class="text-center max-w-2xl mx-auto mb-8">
+                <span class="text-xs uppercase tracking-widest text-rose-400 font-semibold">Tự Tay Cắm Hoa Nghệ Thuật</span>
+                <h3 class="text-2xl sm:text-3xl font-bold font-serif-luxury text-white mt-1">
+                    💐 Vườn Hoa Tình Yêu 20/10
+                </h3>
+                <p class="text-xs sm:text-sm text-rose-200/70 mt-2">
+                    Chọn từng đóa hoa mang thông điệp ý nghĩa để kết thành bó hoa rực rỡ dâng tặng Bà, Mẹ hoặc Em gái!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <!-- Left: Flower Choices -->
+                <div class="md:col-span-6 space-y-4">
+                    <div class="text-xs font-semibold text-rose-300 uppercase tracking-wide">
+                        1. Chọn hoa để thêm vào bó:
+                    </div>
+                    <div id="flower-options-list" class="grid grid-cols-2 gap-2.5">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Right: Visual Bouquet Display -->
+                <div class="md:col-span-6 flex flex-col items-center justify-center p-6 rounded-2xl bg-white/[0.03] border border-white/10">
+                    <div class="text-xs text-rose-300/80 mb-2 font-medium">Bó hoa của bạn: <span id="bouquet-count" class="text-rose-400 font-bold">0 đóa hoa</span></div>
+
+                    <!-- Visual arrangement canvas/wrapper -->
+                    <div class="bouquet-wrapper my-4">
+                        <!-- Flower Items rendered here -->
+                        <div id="bouquet-flowers-display" class="relative w-full h-full flex justify-center items-end"></div>
+                        <!-- Bouquet Wrapping Paper / Ribbon -->
+                        <div class="absolute bottom-0 z-20 flex flex-col items-center">
+                            <div class="w-16 h-12 bg-gradient-to-t from-rose-800 to-rose-600 rounded-b-xl border-t-2 border-amber-300 shadow-md"></div>
+                            <span class="text-lg -mt-3">🎀</span>
+                        </div>
+                    </div>
+
+                    <!-- Meanings Summary -->
+                    <div id="bouquet-meaning-summary" class="flex flex-wrap justify-center gap-1.5 mt-3 min-h-[38px] text-center">
+                        <!-- Chips -->
+                    </div>
+
+                    <!-- Action buttons -->
+                    <div class="flex items-center gap-3 mt-6 w-full max-w-sm">
+                        <button id="btn-clear-bouquet" class="py-2.5 px-4 rounded-xl glass-panel hover:bg-white/10 text-xs text-rose-200 transition-all">
+                            Làm mới
+                        </button>
+                        <button id="btn-gift-bouquet" class="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-rose-600/30 flex items-center justify-center gap-2 transition-all active:scale-95">
+                            <span>💐</span> Gửi Tặng Bó Hoa Này!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: HỘP QUÀ MAY MẮN / BỐC QUẺ 20/10 -->
+        <section class="space-y-6">
+            <div class="text-center">
+                <span class="text-xs uppercase tracking-widest text-amber-400 font-semibold">Bất Ngờ Ngọt Ngào</span>
+                <h3 class="text-2xl sm:text-3xl font-bold font-serif-luxury text-white mt-1">
+                    🎁 Hộp Quà May Mắn & Bốc Quẻ 20/10
+                </h3>
+                <p class="text-xs sm:text-sm text-rose-200/70 mt-2">
+                    Nhấp vào từng hộp quà bí mật để nhận ngay quẻ may mắn và những điều ước nguyện tốt lành!
+                </p>
+            </div>
+
+            <div id="fortune-boxes-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+                <!-- 6 Gift Boxes dynamically rendered -->
+            </div>
+        </section>
+
+        <!-- SECTION: TỰ TẠO THIỆP & LỜI CHÚC CÁ NHÂN HOÁ (POST TO BACKEND DATABASE) -->
+        <section class="glass-card rounded-3xl p-6 sm:p-10 border-rose-500/20 relative overflow-hidden">
+            <div class="text-center max-w-2xl mx-auto mb-8">
+                <span class="text-xs uppercase tracking-widest text-rose-400 font-semibold">Tùy Chỉnh Theo Ý Bạn</span>
+                <h3 class="text-2xl sm:text-3xl font-bold font-serif-luxury text-white mt-1">
+                    ✍️ Tự Viết Thiệp & Đăng Lên Bức Tường
+                </h3>
+                <p class="text-xs sm:text-sm text-rose-200/70 mt-2">
+                    Nhập tên và lời chúc riêng của bạn, xem trước thiệp nghệ thuật và lưu vào cơ sở dữ liệu hệ thống!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Form Inputs -->
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-rose-200 mb-1.5">Gửi tới ai:</label>
+                            <select id="select-role" class="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-rose-400 transition-all">
+                                <option value="Bà" class="bg-gray-900">Bà kính yêu</option>
+                                <option value="Mẹ" class="bg-gray-900" selected>Mẹ yêu dấu</option>
+                                <option value="Em gái" class="bg-gray-900">Em gái dễ thương</option>
+                                <option value="Chị gái" class="bg-gray-900">Chị gái tuyệt vời</option>
+                                <option value="Cô giáo" class="bg-gray-900">Cô giáo kính mến</option>
+                                <option value="Bạn gái" class="bg-gray-900">Người thương / Bạn gái</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-rose-200 mb-1.5">Tên người nhận (ví dụ: Mẹ Lan, Bé Bống...):</label>
+                            <input type="text" id="input-recipient" placeholder="Nhập tên người nhận..." value="Mẹ Lan kính yêu" class="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-rose-400 transition-all">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-rose-200 mb-1.5">Lời chúc của bạn:</label>
+                        <textarea id="input-message" rows="4" class="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-rose-400 transition-all leading-relaxed" placeholder="Viết những lời yêu thương từ trái tim...">Nhân ngày 20/10, con chúc Mẹ luôn tràn đầy niềm vui, sức khỏe dồi dào và luôn tự hào về chúng con! Cảm ơn Mẹ vì tất cả!</textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-rose-200 mb-1.5">Ký tên người gửi:</label>
+                        <input type="text" id="input-sender" placeholder="Con của Mẹ, Anh hai..." value="Con yêu của Mẹ ❤️" class="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-rose-400 transition-all">
+                    </div>
+
+                    <!-- Submit to Backend Wall Button -->
+                    <button id="btn-submit-to-wall" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-rose-600 via-pink-600 to-amber-600 hover:from-rose-500 hover:to-amber-500 text-white font-bold text-sm shadow-xl shadow-rose-600/30 flex items-center justify-center gap-2 transition-all active:scale-95">
+                        <span>🚀</span> Gửi Lời Chúc Lên Bức Tường (Lưu DB)
+                    </button>
+                </div>
+
+                <!-- Live Card Preview -->
+                <div class="lg:col-span-6 flex flex-col items-center">
+                    <div id="custom-greeting-card" class="w-full max-w-md p-7 rounded-2xl bg-gradient-to-br from-[#2a0e21] via-[#1c0817] to-[#2e0d1f] border-2 border-rose-400/40 shadow-2xl relative overflow-hidden text-center space-y-4">
+                        <!-- Vintage Corner Ornaments -->
+                        <div class="absolute top-2 left-2 text-rose-400/30 text-xs">❦</div>
+                        <div class="absolute top-2 right-2 text-rose-400/30 text-xs">❦</div>
+                        <div class="absolute bottom-2 left-2 text-rose-400/30 text-xs">❦</div>
+                        <div class="absolute bottom-2 right-2 text-rose-400/30 text-xs">❦</div>
+
+                        <div class="text-xs uppercase tracking-widest text-amber-300 font-serif" id="card-preview-role">
+                            Dành tặng người Mẹ tuyệt vời
+                        </div>
+
+                        <h5 class="text-xl sm:text-2xl font-bold font-serif-luxury text-rose-gradient" id="card-preview-recipient">
+                            Kính gửi: Mẹ Lan kính yêu
+                        </h5>
+
+                        <div class="w-12 h-0.5 bg-rose-400/40 mx-auto"></div>
+
+                        <p class="text-sm text-rose-100 font-handwriting text-lg sm:text-xl leading-relaxed italic px-3" id="card-preview-message">
+                            Nhân ngày 20/10, con chúc Mẹ luôn tràn đầy niềm vui, sức khỏe dồi dào và luôn tự hào về chúng con! Cảm ơn Mẹ vì tất cả!
+                        </p>
+
+                        <div class="pt-2 text-right text-xs text-amber-200 font-semibold" id="card-preview-sender">
+                            Ký tên: Con yêu của Mẹ ❤️
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex items-center gap-3 mt-5 w-full max-w-md">
+                        <button id="btn-copy-custom-card" class="flex-1 py-2.5 px-4 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 border border-rose-400/50 text-rose-100 font-medium text-xs sm:text-sm flex items-center justify-center gap-2 transition-all active:scale-95">
+                            <span>📋</span> Sao Chép Lời Chúc
+                        </button>
+                        <button id="btn-firework-custom-card" class="py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-600 hover:to-rose-600 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md active:scale-95">
+                            <span>🎆</span> Bắn Pháo Hoa
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="glass-panel border-t border-rose-500/20 py-8 px-4 text-center text-xs text-rose-300/60 relative z-20 space-y-2">
+        <p class="text-sm font-serif-luxury text-rose-200">
+            Kính chúc toàn thể Phụ Nữ Việt Nam luôn Xinh Đẹp, Hạnh Phúc & Bình An! 🌹
+        </p>
+        <p>Full-Stack Web App: FastAPI + SQLite + Canvas Engine + Web Audio API</p>
+    </footer>
+
+    <!-- INTERACTIVE 3D ENVELOPE & LETTER MODAL -->
+    <div id="envelope-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="relative w-full max-w-2xl my-auto">
+            
+            <!-- Close Button -->
+            <button id="close-modal-btn" class="absolute -top-12 right-0 sm:right-2 text-white/70 hover:text-white p-2 rounded-full glass-panel hover:bg-rose-500/30 transition-all z-50" title="Đóng">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Recipient Tabs inside modal -->
+            <div class="flex items-center justify-center gap-2 mb-6">
+                <button class="modal-recipient-tab px-4 py-1.5 rounded-full glass-panel text-xs sm:text-sm font-medium transition-all" data-recipient="ba">
+                    👵 Kính Chúc Bà
+                </button>
+                <button class="modal-recipient-tab px-4 py-1.5 rounded-full glass-panel text-xs sm:text-sm font-medium active-tab transition-all" data-recipient="me">
+                    👩‍🦰 Kính Chúc Mẹ
+                </button>
+                <button class="modal-recipient-tab px-4 py-1.5 rounded-full glass-panel text-xs sm:text-sm font-medium transition-all" data-recipient="emgai">
+                    👧 Chúc Em Gái
+                </button>
+            </div>
+
+            <!-- Envelope Container -->
+            <div class="envelope-container">
+                <div id="envelope-wrapper" class="envelope-wrapper">
+                    
+                    <!-- Envelope Top Flap -->
+                    <div class="envelope-flap">
+                        <!-- Golden Wax Seal -->
+                        <div id="wax-seal-btn" class="wax-seal" title="Nhấp để mở thư">
+                            <span class="text-xs font-bold text-amber-950 font-serif">20.10</span>
+                            <span class="text-[9px] text-amber-900 font-semibold uppercase">Mở Thư</span>
+                        </div>
+                    </div>
+
+                    <!-- Front Pocket -->
+                    <div class="envelope-pocket"></div>
+
+                    <!-- Envelope Front Address Tag -->
+                    <div class="absolute bottom-4 left-6 z-20 pointer-events-none">
+                        <span id="envelope-recipient-tag" class="text-xs text-rose-200/90 font-serif italic">Gửi tặng: Mẹ Yêu Dấu 💖</span>
+                    </div>
+
+                    <!-- The Letter Inside (unfolds upwards) -->
+                    <div id="letter-sheet" class="letter-sheet parchment-border">
+                        <div class="flex items-center justify-between border-b border-rose-900/10 pb-2 mb-3">
+                            <span class="text-xs text-rose-800 font-semibold tracking-wider uppercase">✨ Thư Chúc Mừng 20/10 ✨</span>
+                            <span id="seal-recipient-name" class="text-xs font-serif italic text-rose-700">Mẹ Yêu Dấu</span>
+                        </div>
+
+                        <!-- Salutation -->
+                        <h4 id="letter-salutation" class="font-bold text-base text-rose-950 font-serif mb-2">
+                            Mẹ yêu dấu của con,
+                        </h4>
+
+                        <!-- Poetic Verse -->
+                        <div id="letter-poem" class="my-3 p-3 rounded-lg bg-rose-50 border-l-2 border-rose-400 text-rose-900 font-serif italic text-xs sm:text-sm whitespace-pre-line leading-relaxed">
+                            <!-- Injected by JS -->
+                        </div>
+
+                        <!-- Letter Body -->
+                        <p id="letter-body" class="text-xs sm:text-sm text-slate-800 whitespace-pre-line leading-relaxed font-sans mb-4">
+                            <!-- Injected by JS -->
+                        </p>
+
+                        <!-- Closing -->
+                        <div id="letter-closing" class="text-right text-xs sm:text-sm font-bold text-rose-900 font-handwriting text-base sm:text-lg">
+                            Con yêu Mẹ rất nhiều! ❤️
+                        </div>
+
+                        <!-- Modal Bottom Actions -->
+                        <div class="flex items-center justify-end gap-2 mt-4 pt-3 border-t border-rose-900/10">
+                            <button id="modal-firework-tribute-btn" class="px-3 py-1.5 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-800 text-xs font-medium flex items-center gap-1 transition-all">
+                                <span>🎆</span> Bắn Pháo Hoa Riêng
+                            </button>
+                            <button id="copy-letter-btn" class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium flex items-center gap-1 transition-all">
+                                <span>📋</span> Sao Chép Toàn Bộ Thư
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <p class="text-center text-xs text-rose-200/60 mt-4">
+                💡 Nhấp vào con dấu vàng để mở thư, hoặc nhấn vào các nút trên để xem thư cho Bà / Mẹ / Em gái.
+            </p>
+
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION COMPONENT -->
+    <div id="toast-notification" class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-2xl bg-gradient-to-r from-rose-900/90 to-purple-900/90 border border-rose-400/40 text-white text-xs sm:text-sm shadow-2xl backdrop-blur-md opacity-0 translate-y-4 pointer-events-none transition-all duration-300">
+        <span class="text-lg">✨</span>
+        <span id="toast-message">Thông báo thành công!</span>
+    </div>
+
+    <!-- Application Scripts -->
+    <script src="audio.js"></script>
+    <script src="fireworks.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
