@@ -11,6 +11,118 @@
 </head>
 <body class="bg-[#120512] text-slate-100 selection:bg-rose-500 selection:text-white relative min-h-screen">
 
+    <!-- WELCOME INTRO OVERLAY (MÀN CHÀO NỞ RỘ HOA 20/10) -->
+    <div id="intro-overlay">
+        <!-- Skip button in top right -->
+        <button id="skip-intro-btn" class="absolute top-6 right-6 text-xs text-rose-200/70 hover:text-white px-3.5 py-1.5 rounded-full glass-panel hover:bg-white/10 transition-all z-20">
+            Bỏ qua ✕
+        </button>
+
+        <div class="relative z-10 max-w-xl w-full text-center space-y-6">
+            <!-- Floating Floral Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-500/15 border border-rose-400/40 text-rose-300 text-xs sm:text-sm font-medium shadow-inner backdrop-blur-md animate-bounce-slow">
+                <span>✨</span>
+                <span>20 Tháng 10 • Trao Gửi Yêu Thương</span>
+                <span>✨</span>
+            </div>
+
+            <!-- Intro Stage: Flower Bud / Blooming Flower -->
+            <div class="intro-bloom-stage my-4">
+                <div class="bloom-glow-aura"></div>
+                
+                <!-- State 1: Bud -->
+                <div id="intro-bud-view" class="bloom-bud flex flex-col items-center justify-center cursor-pointer group" title="Chạm để mở hoa">
+                    <div class="text-7xl sm:text-8xl filter drop-shadow-[0_10px_25px_rgba(255,75,114,0.6)] transform group-hover:scale-110 transition-transform duration-300 animate-pulse">
+                        🌹
+                    </div>
+                    <div class="mt-2 text-xs text-amber-300 font-serif italic">Đóa hoa đang hé nụ...</div>
+                </div>
+
+                <!-- State 2: Full Blooming Bouquet Graphic (SVG) -->
+                <div id="intro-flower-view" class="bloom-flower-full">
+                    <svg viewBox="0 0 200 200" class="w-48 h-48 sm:w-56 sm:h-56">
+                        <defs>
+                            <linearGradient id="petalGradOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ff2a6d" />
+                                <stop offset="60%" stop-color="#ff4b72" />
+                                <stop offset="100%" stop-color="#b5179e" />
+                            </linearGradient>
+                            <linearGradient id="petalGradInner" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#ff758c" />
+                                <stop offset="70%" stop-color="#ff9a9e" />
+                                <stop offset="100%" stop-color="#f43f5e" />
+                            </linearGradient>
+                            <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#ffffff" />
+                                <stop offset="50%" stop-color="#ffd700" />
+                                <stop offset="100%" stop-color="#ffae19" />
+                            </radialGradient>
+                        </defs>
+
+                        <!-- Green Leaves -->
+                        <g transform="translate(100, 100)">
+                            <path d="M-55,35 Q-80,75 0,60 Q-20,35 -55,35" fill="#15803d" opacity="0.85" />
+                            <path d="M55,35 Q80,75 0,60 Q20,35 55,35" fill="#16a34a" opacity="0.85" />
+                        </g>
+
+                        <!-- Outer Petals Layer (6 petals) -->
+                        <g class="petal-layer-outer" transform="translate(100, 100)">
+                            <path d="M0,0 C-30,-70 30,-70 0,0" fill="url(#petalGradOuter)" transform="rotate(0)" />
+                            <path d="M0,0 C-30,-70 30,-70 0,0" fill="url(#petalGradOuter)" transform="rotate(60)" />
+                            <path d="M0,0 C-30,-70 30,-70 0,0" fill="url(#petalGradOuter)" transform="rotate(120)" />
+                            <path d="M0,0 C-30,-70 30,-70 0,0" fill="url(#petalGradOuter)" transform="rotate(180)" />
+                            <path d="M0,0 C-30,-70 30,-70 0,0" fill="url(#petalGradOuter)" transform="rotate(240)" />
+                            <path d="M0,0 C-30,-70 30,-70 0,0" fill="url(#petalGradOuter)" transform="rotate(300)" />
+                        </g>
+
+                        <!-- Inner Petals Layer (5 petals) -->
+                        <g class="petal-layer-inner" transform="translate(100, 100)">
+                            <path d="M0,0 C-24,-52 24,-52 0,0" fill="url(#petalGradInner)" transform="rotate(30)" />
+                            <path d="M0,0 C-24,-52 24,-52 0,0" fill="url(#petalGradInner)" transform="rotate(102)" />
+                            <path d="M0,0 C-24,-52 24,-52 0,0" fill="url(#petalGradInner)" transform="rotate(174)" />
+                            <path d="M0,0 C-24,-52 24,-52 0,0" fill="url(#petalGradInner)" transform="rotate(246)" />
+                            <path d="M0,0 C-24,-52 24,-52 0,0" fill="url(#petalGradInner)" transform="rotate(318)" />
+                        </g>
+
+                        <!-- Golden Stamen Center -->
+                        <circle cx="100" cy="100" r="18" fill="url(#centerGlow)" />
+                        <circle cx="100" cy="100" r="7" fill="#ffffff" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Initial Action Button (Chạm để nở hoa) -->
+            <div id="intro-step1" class="space-y-4">
+                <h3 class="text-2xl sm:text-3xl font-extrabold font-serif-luxury text-rose-gradient">
+                    Có Một Món Quà Dành Tặng Người Phụ Nữ Tuyệt Vời
+                </h3>
+                <p class="text-xs sm:text-sm text-rose-200/80 max-w-md mx-auto">
+                    Nhấp vào nút bên dưới để khai mở đóa hoa tình yêu và cùng lắng nghe giai điệu ngọt ngào nhân ngày 20/10!
+                </p>
+                <div>
+                    <button id="btn-trigger-bloom" class="py-3.5 px-8 rounded-full bg-gradient-to-r from-rose-600 via-pink-600 to-amber-500 hover:from-rose-500 hover:to-amber-400 text-white font-bold text-sm sm:text-base shadow-2xl shadow-rose-600/50 hover:scale-105 transition-all duration-300 active:scale-95 animate-pulse">
+                        🌸 Chạm Để Nở Hoa & Nhận Quà 🌸
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bloomed Message (Hiển thị sau khi hoa nở rộ) -->
+            <div id="intro-step2" class="hidden space-y-4 animate-scale-up">
+                <h3 class="text-2xl sm:text-4xl font-extrabold font-serif-luxury text-gold-gradient">
+                    Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10!
+                </h3>
+                <div class="p-4 sm:p-5 rounded-2xl glass-panel border border-rose-400/40 text-xs sm:text-sm leading-relaxed text-rose-100 font-serif italic max-w-lg mx-auto shadow-2xl">
+                    "Kính chúc <strong class="text-amber-300 not-italic font-bold">Bà Nội</strong>, <strong class="text-amber-300 not-italic font-bold">Bà Ngoại</strong>, <strong class="text-rose-400 not-italic font-bold">Mẹ Thắm</strong>, cùng hai em gái <strong class="text-pink-300 not-italic font-bold">Hân Bò</strong> & <strong class="text-pink-300 not-italic font-bold">Hoa</strong> luôn dồi dào sức khỏe, tràn ngập hạnh phúc, vạn sự bình an và mãi rạng rỡ như những đóa hoa tươi thắm nhất!"
+                </div>
+                <div class="pt-2">
+                    <button id="btn-enter-website" class="py-3 px-8 rounded-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 text-white font-bold text-xs sm:text-sm shadow-xl shadow-rose-600/40 hover:scale-105 transition-all active:scale-95 flex items-center gap-2 mx-auto">
+                        <span>💐</span> Khám Phá Bức Tranh Yêu Thương <span>✨</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Atmospheric Glowing Background Orbs -->
     <div class="bg-glow-orb w-[500px] h-[500px] bg-rose-600/20 -top-40 -left-40"></div>
     <div class="bg-glow-orb w-[600px] h-[600px] bg-pink-500/15 top-1/3 -right-48"></div>

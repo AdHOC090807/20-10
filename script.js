@@ -195,6 +195,7 @@ class App {
         this.bindEvents();
         this.setupSettingsModal();
         this.setupEditModal();
+        this.setupWelcomeIntro();
         this.renderBouquet();
         this.checkBackendAndLoad();
     }
@@ -283,6 +284,55 @@ class App {
         document.getElementById('btn-submit-to-wall').addEventListener('click', () => {
             this.submitWishToBackend();
         });
+    }
+
+    // ----------------- Welcome Intro: Blooming Flower Overlay -----------------
+    setupWelcomeIntro() {
+        const introOverlay = document.getElementById('intro-overlay');
+        const triggerBloomBtn = document.getElementById('btn-trigger-bloom');
+        const budView = document.getElementById('intro-bud-view');
+        const step1 = document.getElementById('intro-step1');
+        const step2 = document.getElementById('intro-step2');
+        const enterBtn = document.getElementById('btn-enter-website');
+        const skipBtn = document.getElementById('skip-intro-btn');
+
+        if (!introOverlay) return;
+
+        const triggerBloom = () => {
+            introOverlay.classList.add('intro-bloomed');
+            step1.classList.add('hidden');
+            step2.classList.remove('hidden');
+
+            // Play background song immediately (solves browser autoplay restriction)
+            if (window.soundEngine) {
+                window.soundEngine.startMusic();
+                this.updateMusicUI(true);
+                window.soundEngine.playGiftFanfare();
+            }
+
+            // Burst blooming flowers around center
+            if (window.particleCanvas) {
+                const cx = window.innerWidth / 2;
+                const cy = window.innerHeight * 0.42;
+                window.particleCanvas.spawnBloomingFlower(cx, cy);
+                setTimeout(() => window.particleCanvas.spawnBloomingFlower(cx - 70, cy + 20), 200);
+                setTimeout(() => window.particleCanvas.spawnBloomingFlower(cx + 70, cy + 20), 400);
+            }
+        };
+
+        const dismissIntro = () => {
+            introOverlay.classList.add('intro-hidden');
+            if (window.soundEngine) {
+                window.soundEngine.startMusic();
+                this.updateMusicUI(true);
+            }
+            this.showToast("🌸 Chúc mừng ngày Phụ nữ Việt Nam 20/10!");
+        };
+
+        if (triggerBloomBtn) triggerBloomBtn.addEventListener('click', triggerBloom);
+        if (budView) budView.addEventListener('click', triggerBloom);
+        if (enterBtn) enterBtn.addEventListener('click', dismissIntro);
+        if (skipBtn) skipBtn.addEventListener('click', dismissIntro);
     }
 
     // ----------------- Settings & Management -----------------
