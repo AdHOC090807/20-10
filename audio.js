@@ -62,6 +62,10 @@ class SoundEngine {
         }
     }
 
+    setVolume(val) {
+        this.bgMusic.volume = Math.max(0, Math.min(1, val));
+    }
+
     // Toggle mute/unmute or play/pause
     toggleMusic(onUpdate) {
         this.init();

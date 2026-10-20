@@ -1,6 +1,6 @@
 /* style.css - Custom luxury styling for 20/10 celebration */
 
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Dancing+Script:wght@600;700&display=swap');
 
 :root {
     --primary-rose: #ff3366;
@@ -15,19 +15,28 @@
 }
 
 body {
-    font-family: 'Be Vietnam Pro', sans-serif;
+    font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: var(--dark-bg);
     color: #fff;
     overflow-x: hidden;
     min-height: 100vh;
 }
 
+/* Perfect Vietnamese typography with Lora */
 .font-serif-luxury {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', 'Be Vietnam Pro', Georgia, serif;
 }
 
 .font-handwriting {
     font-family: 'Dancing Script', cursive;
+}
+
+/* Letter poem with flawless Vietnamese diacritics */
+#letter-poem {
+    font-family: 'Lora', 'Be Vietnam Pro', Georgia, serif;
+    font-style: italic;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
 }
 
 /* Background Atmospheric Glows */
@@ -41,7 +50,7 @@ body {
 
 /* Glassmorphism Classes */
 .glass-panel {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -56,7 +65,7 @@ body {
 }
 
 .glass-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-5px);
     border-color: rgba(255, 117, 140, 0.45);
     box-shadow: 0 16px 36px -10px rgba(255, 51, 102, 0.3);
 }
@@ -72,31 +81,6 @@ body {
     background: linear-gradient(135deg, #ffffff 0%, #ffb6c1 30%, #ff4b72 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-}
-
-/* Interactive Click Sparkle */
-.click-sparkle-float {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    font-size: 1.4rem;
-    animation: sparkleFly 0.85s cubic-bezier(0.12, 0.8, 0.32, 1) forwards;
-    transform: translate(-50%, -50%);
-}
-
-@keyframes sparkleFly {
-    0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(0.6);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.3);
-    }
-    100% {
-        opacity: 0;
-        transform: translate(calc(-50% + var(--dx) * 1.3), calc(-50% + var(--dy) * 1.3 - 25px)) scale(0.4);
-    }
 }
 
 /* Music Wave Equalizer */
@@ -257,10 +241,12 @@ body {
 }
 
 /* Custom Scrollbar */
-.letter-sheet::-webkit-scrollbar {
+.letter-sheet::-webkit-scrollbar,
+#settings-modal::-webkit-scrollbar {
     width: 5px;
 }
-.letter-sheet::-webkit-scrollbar-thumb {
+.letter-sheet::-webkit-scrollbar-thumb,
+#settings-modal::-webkit-scrollbar-thumb {
     background: #e2b4be;
     border-radius: 4px;
 }
@@ -291,20 +277,26 @@ body {
 }
 
 @keyframes scaleUp {
-    0% { transform: scale(0.8); opacity: 0; }
+    0% { transform: scale(0.85); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
 }
 .animate-scale-up {
-    animation: scaleUp 0.35s ease forwards;
+    animation: scaleUp 0.3s ease forwards;
 }
 
-/* Subtle continuous pulse for gift box */
 @keyframes bounceSlow {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-7px); }
 }
 .animate-bounce-slow {
     animation: bounceSlow 2.5s ease-in-out infinite;
+}
+
+/* Card delete smooth animation */
+.wish-card-fading {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+    transition: all 0.35s ease;
 }
 
 /* Responsive adjustments */

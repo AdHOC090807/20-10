@@ -1,181 +1,182 @@
-// script.js - Interactive Controller for Vietnamese Women's Day 20/10 with Full-Stack Backend Integration
+// script.js - Interactive Controller for Vietnamese Women's Day 20/10 with Full CRUD & Settings
 
 const API_BASE = (window.location.protocol === 'file:' || !window.location.port) 
     ? 'http://127.0.0.1:8000' 
     : '';
 
+// Helper to guarantee Unicode NFC normalization
+const nfc = (str) => (str ? str.normalize('NFC') : '');
+
 const WISHES_DATA = {
     banoi: {
-        role: "Bà Nội Kính Yêu",
-        title: "Kính Chúc Bà Nội - Cội Nguồn Bình An & Phúc Thọ",
+        role: nfc("Bà Nội Kính Yêu"),
+        title: nfc("Kính Chúc Bà Nội - Cội Nguồn Bình An & Phúc Thọ"),
         avatar: "👵",
-        badge: "Bà Nội Kính Yêu",
-        shortDesc: "Bàn tay ấm áp chở che tháng ngày, câu chuyện cổ tích nuôi lớn tuổi thơ con.",
+        badge: nfc("Bà Nội Kính Yêu"),
+        shortDesc: nfc("Bàn tay ấm áp chở che tháng ngày, câu chuyện cổ tích nuôi lớn tuổi thơ con."),
         letter: {
-            salutation: "Kính gửi Bà Nội kính yêu của cháu,",
-            poem: `Nắng vàng trải nhẹ lối thu sang,\nTháng Mười rộn rã đón ngày vàng.\nKính chúc Bà Nội muôn sức khỏe,\nAn lành, thọ tỷ tựa Nam Sơn!`,
-            body: `Nhân ngày Phụ nữ Việt Nam 20/10, chúng cháu muốn gửi trọn tấm lòng hiếu kính và biết ơn sâu sắc nhất tới Bà Nội. Cảm ơn Bà Nội vì đã dành trọn cả cuộc đời tần tảo, hy sinh vì con vì cháu. Những câu chuyện cổ tích ngày ấu thơ, lời ru ấm áp và tình thương bao la của Bà Nội là điểm tựa tinh thần quý giá nhất của cả gia đình.\n\nCháu kính chúc Bà Nội luôn dồi dào sức khỏe, sống vui tươi, thanh thản bên con cháu, mãi là cây cao bóng cả che chở cho đại gia đình mình!`,
-            closing: "Cháu của Bà Nội yêu quý và kính trọng rất nhiều! ❤️"
+            salutation: nfc("Kính gửi Bà Nội kính yêu của cháu,"),
+            poem: nfc(`Nắng vàng trải nhẹ lối thu sang,\nTháng Mười rộn rã đón ngày vàng.\nKính chúc Bà Nội muôn sức khỏe,\nAn lành, thọ tỷ tựa Nam Sơn!`),
+            body: nfc(`Nhân ngày Phụ nữ Việt Nam 20/10, chúng cháu muốn gửi trọn tấm lòng hiếu kính và biết ơn sâu sắc nhất tới Bà Nội. Cảm ơn Bà Nội vì đã dành trọn cả cuộc đời tần tảo, hy sinh vì con vì cháu. Những câu chuyện cổ tích ngày ấu thơ, lời ru ấm áp và tình thương bao la của Bà Nội là điểm tựa tinh thần quý giá nhất của cả gia đình.\n\nCháu kính chúc Bà Nội luôn dồi dào sức khỏe, sống vui tươi, thanh thản bên con cháu, mãi là cây cao bóng cả che chở cho đại gia đình mình!`),
+            closing: nfc("Cháu của Bà Nội yêu quý và kính trọng rất nhiều! ❤️")
         },
         wishesList: [
-            "Nhân ngày 20/10, con/cháu kính chúc Bà Nội luôn mạnh khỏe, sống lâu trăm tuổi, bình an và hạnh phúc bên con cháu!",
-            "Kính chúc Bà Nội một ngày 20/10 thật nhiều niềm vui! Cháu mong Bà Nội ăn ngon miệng, ngủ ngon giấc và nụ cười hiền từ luôn nở trên môi.",
-            "Bà Nội ơi, cả nhà kính chúc Bà Nội phúc như Đông Hải, thọ tỷ Nam Sơn, mãi là chỗ dựa tinh thần vững chãi cho chúng con!",
-            "Con kính chúc Bà Nội ngày lễ 20/10 ngập tràn an yên. Cảm ơn tình thương bao la trời biển mà Bà Nội luôn dành cho chúng con!"
+            nfc("Nhân ngày 20/10, con/cháu kính chúc Bà Nội luôn mạnh khỏe, sống lâu trăm tuổi, bình an và hạnh phúc bên con cháu!"),
+            nfc("Kính chúc Bà Nội một ngày 20/10 thật nhiều niềm vui! Cháu mong Bà Nội ăn ngon miệng, ngủ ngon giấc và nụ cười hiền từ luôn nở trên môi."),
+            nfc("Bà Nội ơi, cả nhà kính chúc Bà Nội phúc như Đông Hải, thọ tỷ Nam Sơn, mãi là chỗ dựa tinh thần vững chãi cho chúng con!"),
+            nfc("Con kính chúc Bà Nội ngày lễ 20/10 ngập tràn an yên. Cảm ơn tình thương bao la trời biển mà Bà Nội luôn dành cho chúng con!")
         ],
-        fireworkMessage: "Kính Chúc Bà Nội Bách Niên Giai Lão - Muôn Đời Bình An!",
+        fireworkMessage: nfc("Kính Chúc Bà Nội Bách Niên Giai Lão - Muôn Đời Bình An!"),
         palette: ['#ffd700', '#ffae19', '#fff275', '#ffffff']
     },
     bangoai: {
-        role: "Bà Ngoại Thương Yêu",
-        title: "Kính Chúc Bà Ngoại - Vòng Tay Yêu Thương Bất Tận",
+        role: nfc("Bà Ngoại Thương Yêu"),
+        title: nfc("Kính Chúc Bà Ngoại - Vòng Tay Yêu Thương Bất Tận"),
         avatar: "👵",
-        badge: "Bà Ngoại Thương Yêu",
-        shortDesc: "Tình thương êm dịu ngọt ngào, những món quà quê nuôi dưỡng tâm hồn con.",
+        badge: nfc("Bà Ngoại Thương Yêu"),
+        shortDesc: nfc("Tình thương êm dịu ngọt ngào, những món quà quê nuôi dưỡng tâm hồn con."),
         letter: {
-            salutation: "Kính gửi Bà Ngoại thương yêu của cháu,",
-            poem: `Ngàn dặm đường xa dạ chẳng xa,\nTình thương Ngoại gửi ấm muôn nhà.\nTháng Mười kính chúc Bà Ngoại khỏe,\nPhúc lộc tràn trề tựa đóa hoa!`,
-            body: `Nhân ngày 20/10, cháu kính chúc Bà Ngoại thân yêu có một ngày lễ thật vui vẻ và đong đầy tình cảm! Cháu nhớ mãi những lần về quê được Bà Ngoại ôm vào lòng, cho những thức quà ngon, dạy bảo từng điều lễ phép nhỏ nhất.\n\nCháu chỉ mong sao Bà Ngoại luôn mạnh khỏe, tinh thần an lạc, lúc nào cũng tươi cười sum vầy cùng con cháu mỗi dịp tết đến xuân về. Chúng cháu yêu Bà Ngoại nhiều lắm ạ!`,
-            closing: "Cháu của Bà Ngoại thương nhớ và kính yêu! 🌹"
+            salutation: nfc("Kính gửi Bà Ngoại thương yêu của cháu,"),
+            poem: nfc(`Ngàn dặm đường xa dạ chẳng xa,\nTình thương Ngoại gửi ấm muôn nhà.\nTháng Mười kính chúc Bà Ngoại khỏe,\nPhúc lộc tràn trề tựa đóa hoa!`),
+            body: nfc(`Nhân ngày 20/10, cháu kính chúc Bà Ngoại thân yêu có một ngày lễ thật vui vẻ và đong đầy tình cảm! Cháu nhớ mãi những lần về quê được Bà Ngoại ôm vào lòng, cho những thức quà ngon, dạy bảo từng điều lễ phép nhỏ nhất.\n\nCháu chỉ mong sao Bà Ngoại luôn mạnh khỏe, tinh thần an lạc, lúc nào cũng tươi cười sum vầy cùng con cháu mỗi dịp tết đến xuân về. Chúng cháu yêu Bà Ngoại nhiều lắm ạ!`),
+            closing: nfc("Cháu của Bà Ngoại thương nhớ và kính yêu! 🌹")
         },
         wishesList: [
-            "Con kính chúc Bà Ngoại ngày Phụ nữ Việt Nam 20/10 thật nhiều sức khỏe, bình an, vạn sự như ý bên con cháu!",
-            "Chúc Bà Ngoại của cháu luôn khỏe mạnh, dẻo dai, mỗi ngày đều tràn ngập niềm vui và tiếng cười rộn rã!",
-            "Nhân ngày 20/10, chúng cháu gửi ngàn cái ôm ấm áp về với Bà Ngoại. Mong Ngoại luôn an vui, thọ trường!",
-            "Kính chúc Bà Ngoại luôn luôn tươi trẻ, thân tâm an lạc, ăn ngủ điều độ và mãi là bến đỗ yêu thương của con cháu!"
+            nfc("Con kính chúc Bà Ngoại ngày Phụ nữ Việt Nam 20/10 thật nhiều sức khỏe, bình an, vạn sự như ý bên con cháu!"),
+            nfc("Chúc Bà Ngoại của cháu luôn khỏe mạnh, dẻo dai, mỗi ngày đều tràn ngập niềm vui và tiếng cười rộn rã!"),
+            nfc("Nhân ngày 20/10, chúng cháu gửi ngàn cái ôm ấm áp về với Bà Ngoại. Mong Ngoại luôn an vui, thọ trường!"),
+            nfc("Kính chúc Bà Ngoại luôn luôn tươi trẻ, thân tâm an lạc, ăn ngủ điều độ và mãi là bến đỗ yêu thương của con cháu!")
         ],
-        fireworkMessage: "Kính Chúc Bà Ngoại Sống Lâu Trăm Tuổi - Hạnh Phúc Vẹn Toàn!",
+        fireworkMessage: nfc("Kính Chúc Bà Ngoại Sống Lâu Trăm Tuổi - Hạnh Phúc Vẹn Toàn!"),
         palette: ['#f59e0b', '#fbbf24', '#fde68a', '#ffffff']
     },
     metham: {
-        role: "Mẹ Thắm Tuyệt Vời",
-        title: "Kính Chúc Mẹ Thắm - Vầng Thái Dương Ấm Áp Đời Con",
+        role: nfc("Mẹ Thắm Tuyệt Vời"),
+        title: nfc("Kính Chúc Mẹ Thắm - Vầng Thái Dương Ấm Áp Đời Con"),
         avatar: "👩‍🦰",
-        badge: "Mẹ Thắm Yêu Dấu 👑",
-        shortDesc: "Cả đời vì con mà không quản nhọc nhằn, vòng tay Mẹ Thắm là chốn về bình yên nhất.",
+        badge: nfc("Mẹ Thắm Yêu Dấu 👑"),
+        shortDesc: nfc("Cả đời vì con mà không quản nhọc nhằn, vòng tay Mẹ Thắm là chốn về bình yên nhất."),
         letter: {
-            salutation: "Mẹ Thắm yêu dấu của con,",
-            poem: `Đi khắp thế gian không ai tốt bằng Mẹ,\nGánh nặng cuộc đời không ai khổ bằng Cha.\nMẹ Thắm một đời lo toan vất vả,\nCon nguyện khắc ghi mãi công ơn Người!`,
-            body: `Mẹ Thắm ơi, hôm nay là ngày 20/10 - ngày tôn vinh những người phụ nữ tuyệt vời, và trong lòng con, Mẹ Thắm luôn là người phụ nữ đẹp nhất, vĩ đại và bao dung nhất trên trần đời!\n\nCon cảm ơn Mẹ Thắm vì bao năm tháng nhọc nhằn đã chăm sóc, yêu thương con vô điều kiện. Cảm ơn những bữa cơm ngon mẹ nấu, những lời dặn dò ân cần mỗi khi con bước ra ngoài xã hội. Mẹ Thắm đã hy sinh thanh xuân, ước mơ riêng để lo cho con có được ngày hôm nay.\n\nNhân ngày 20/10, con chúc Mẹ Thắm luôn dồi dào sức khỏe, trẻ mãi không già, mỗi ngày trôi qua đều nhẹ nhõm, hạnh phúc và ngập tràn niềm vui tự hào về chúng con!`,
-            closing: "Con yêu Mẹ Thắm nhiều hơn tất cả mọi điều trên đời! Yêu Mẹ Thắm vô cùng! 🌹"
+            salutation: nfc("Mẹ Thắm yêu dấu của con,"),
+            poem: nfc(`Đi khắp thế gian không ai tốt bằng Mẹ,\nGánh nặng cuộc đời không ai khổ bằng Cha.\nMẹ Thắm một đời lo toan vất vả,\nCon nguyện khắc ghi mãi công ơn Người!`),
+            body: nfc(`Mẹ Thắm ơi, hôm nay là ngày 20/10 - ngày tôn vinh những người phụ nữ tuyệt vời, và trong lòng con, Mẹ Thắm luôn là người phụ nữ đẹp nhất, vĩ đại và bao dung nhất trên trần đời!\n\nCon cảm ơn Mẹ Thắm vì bao năm tháng nhọc nhằn đã chăm sóc, yêu thương con vô điều kiện. Cảm ơn những bữa cơm ngon mẹ nấu, những lời dặn dò ân cần mỗi khi con bước ra ngoài xã hội. Mẹ Thắm đã hy sinh thanh xuân, ước mơ riêng để lo cho con có được ngày hôm nay.\n\nNhân ngày 20/10, con chúc Mẹ Thắm luôn dồi dào sức khỏe, trẻ mãi không già, mỗi ngày trôi qua đều nhẹ nhõm, hạnh phúc và ngập tràn niềm vui tự hào về chúng con!`),
+            closing: nfc("Con yêu Mẹ Thắm nhiều hơn tất cả mọi điều trên đời! Yêu Mẹ Thắm vô cùng! 🌹")
         },
         wishesList: [
-            "Chúc Mẹ Thắm một ngày 20/10 thật nhiều niềm vui, rực rỡ và hạnh phúc! Cảm ơn Mẹ Thắm vì đã luôn là chỗ dựa bình yên nhất của con.",
-            "Nhân ngày Phụ nữ Việt Nam, con chúc Mẹ Thắm dồi dào sức khỏe, trẻ mãi với thời gian, lúc nào cũng cười tươi như hoa!",
-            "Mẹ Thắm ơi, hôm nay Mẹ Thắm hãy nghỉ ngơi thật thoải mái nhé, việc nhà đã có chúng con lo! Chúc Mẹ Thắm nhận được cả rừng hoa và quà!",
-            "Gửi đến Mẹ Thắm - người phụ nữ tuyệt vời nhất quả đất: Chúc Mẹ Thắm 20/10 hạnh phúc ngập tràn, 364 ngày còn lại an yên và tràn đầy tiếng cười!"
+            nfc("Chúc Mẹ Thắm một ngày 20/10 thật nhiều niềm vui, rực rỡ và hạnh phúc! Cảm ơn Mẹ Thắm vì đã luôn là chỗ dựa bình yên nhất của con."),
+            nfc("Nhân ngày Phụ nữ Việt Nam, con chúc Mẹ Thắm dồi dào sức khỏe, trẻ mãi với thời gian, lúc nào cũng cười tươi như hoa!"),
+            nfc("Mẹ Thắm ơi, hôm nay Mẹ Thắm hãy nghỉ ngơi thật thoải mái nhé, việc nhà đã có chúng con lo! Chúc Mẹ Thắm nhận được cả rừng hoa và quà!"),
+            nfc("Gửi đến Mẹ Thắm - người phụ nữ tuyệt vời nhất quả đất: Chúc Mẹ Thắm 20/10 hạnh phúc ngập tràn, 364 ngày còn lại an yên và tràn đầy tiếng cười!")
         ],
-        fireworkMessage: "Mẹ Thắm Mãi Trẻ Đẹp, Hạnh Phúc & Tràn Đầy Sức Khỏe!",
+        fireworkMessage: nfc("Mẹ Thắm Mãi Trẻ Đẹp, Hạnh Phúc & Tràn Đầy Sức Khỏe!"),
         palette: ['#ff0844', '#ff4b72', '#ff758c', '#ffffff']
     },
     hanbo: {
-        role: "Em Hân Bò",
-        title: "Chúc Em Hân Bò - Bông Hoa Nhí Nhảnh & Rực Rỡ",
+        role: nfc("Em Hân Bò"),
+        title: nfc("Chúc Em Hân Bò - Bông Hoa Nhí Nhảnh & Rực Rỡ"),
         avatar: "👧",
-        badge: "Em Hân Bò Đáng Yêu",
-        shortDesc: "Cô em gái siêu lém lỉnh, mang lại ngập tràn tiếng cười và năng lượng tích cực.",
+        badge: nfc("Em Hân Bò Đáng Yêu"),
+        shortDesc: nfc("Cô em gái siêu lém lỉnh, mang lại ngập tràn tiếng cười và năng lượng tích cực."),
         letter: {
-            salutation: "Gửi cô em Hân Bò siêu quậy của anh/chị,",
-            poem: `20 tháng 10 rộn rã vui,\nHân Bò xinh xắn rạng ngời cười.\nĂn nhiều không béo, thi toàn đỗ,\nMay mắn ngập tràn, sáng muôn nơi!`,
-            body: `Chúc mừng ngày Phụ nữ Việt Nam 20/10 tới cô em Hân Bò siêu cấp dễ thương và nhí nhảnh của nhà mình!\n\nChúc Hân Bò ngày càng xinh xắn, duyên dáng, bớt lì một chút xíu, học thật giỏi, thi cử đạt điểm cao chót vót và đạt được mọi nguyện vọng của bản thân nhé. Dù ngày thường có hay cãi nhau chí chóe nhưng lúc nào anh/chị và cả nhà cũng hết mực cưng chiều và yêu thương Hân Bò.\n\nChúc Hân Bò ngày 20/10 nhận được cả núi quà, trà sữa uống mệt nghỉ và luôn vui tươi rạng rỡ nha!`,
-            closing: "Cả nhà luôn yêu thương và ủng hộ Hân Bò hết mình! Chúc mừng 20/10 Hân Bò! 🎉"
+            salutation: nfc("Gửi cô em Hân Bò siêu quậy của anh/chị,"),
+            poem: nfc(`20 tháng 10 rộn rã vui,\nHân Bò xinh xắn rạng ngời cười.\nĂn nhiều không béo, thi toàn đỗ,\nMay mắn ngập tràn, sáng muôn nơi!`),
+            body: nfc(`Chúc mừng ngày Phụ nữ Việt Nam 20/10 tới cô em Hân Bò siêu cấp dễ thương và nhí nhảnh của nhà mình!\n\nChúc Hân Bò ngày càng xinh xắn, duyên dáng, bớt lì một chút xíu, học thật giỏi, thi cử đạt điểm cao chót vót và đạt được mọi nguyện vọng của bản thân nhé. Dù ngày thường có hay cãi nhau chí chóe nhưng lúc nào anh/chị và cả nhà cũng hết mực cưng chiều và yêu thương Hân Bò.\n\nChúc Hân Bò ngày 20/10 nhận được cả núi quà, trà sữa uống mệt nghỉ và luôn vui tươi rạng rỡ nha!`),
+            closing: nfc("Cả nhà luôn yêu thương và ủng hộ Hân Bò hết mình! Chúc mừng 20/10 Hân Bò! 🎉")
         },
         wishesList: [
-            "Chúc em Hân Bò 20/10 nhận được cả núi quà, ngày càng xinh gái, học giỏi, thi đâu đỗ đó nhé! Nhớ chia bớt quà cho anh/chị đấy!",
-            "Happy 20/10 cô em Hân Bò! Chúc Hân Bò luôn giữ nụ cười tỏa nắng, ăn nhiều không béo, da trắng dáng xinh và luôn yêu đời!",
-            "Chúc Hân Bò một ngày 20/10 thật rực rỡ, tự tin, thông minh và gặt hái thật nhiều thành công trên con đường sắp tới!",
-            "20/10 chúc Hân Bò: Tiền đầy túi, tình đầy tim, bớt nhõng nhẽo và luôn là cô bé đáng yêu nhất của cả nhà!"
+            nfc("Chúc em Hân Bò 20/10 nhận được cả núi quà, ngày càng xinh gái, học giỏi, thi đâu đỗ đó nhé! Nhớ chia bớt quà cho anh/chị đấy!"),
+            nfc("Happy 20/10 cô em Hân Bò! Chúc Hân Bò luôn giữ nụ cười tỏa nắng, ăn nhiều không béo, da trắng dáng xinh và luôn yêu đời!"),
+            nfc("Chúc Hân Bò một ngày 20/10 thật rực rỡ, tự tin, thông minh và gặt hái thật nhiều thành công trên con đường sắp tới!"),
+            nfc("20/10 chúc Hân Bò: Tiền đầy túi, tình đầy tim, bớt nhõng nhẽo và luôn là cô bé đáng yêu nhất của cả nhà!")
         ],
-        fireworkMessage: "Chúc Em Hân Bò Xinh Đẹp, Học Giỏi & Rạng Rỡ!",
+        fireworkMessage: nfc("Chúc Em Hân Bò Xinh Đẹp, Học Giỏi & Rạng Rỡ!"),
         palette: ['#ec4899', '#f472b6', '#fbcfe8', '#ffffff']
     },
     hoa: {
-        role: "Em Hoa Dịu Dàng",
-        title: "Chúc Em Hoa - Đóa Hoa Tươi Thắm & Duyên Dáng",
+        role: nfc("Em Hoa Dịu Dàng"),
+        title: nfc("Chúc Em Hoa - Đóa Hoa Tươi Thắm & Duyên Dáng"),
         avatar: "🌸",
-        badge: "Em Hoa Dễ Thương",
-        shortDesc: "Dịu dàng, đáng yêu và ngát hương thơm như chính cái tên của em.",
+        badge: nfc("Em Hoa Dễ Thương"),
+        shortDesc: nfc("Dịu dàng, đáng yêu và ngát hương thơm như chính cái tên của em."),
         letter: {
-            salutation: "Gửi em Hoa dịu dàng và đáng yêu của anh/chị,",
-            poem: `Đóa hoa xinh xắn ngát hương bay,\nChúc em ngày hội rộn vui say.\nHạnh phúc, an nhiên, đời rạng rỡ,\nTương lai tươi sáng nở từng ngày!`,
-            body: `Chúc mừng ngày 20/10 tới em Hoa thân yêu của gia đình mình!\n\nChúc Hoa một ngày lễ ngập tràn hoa tươi, lời chúc ngọt ngào và những món quà xinh xắn nhất. Chúc em luôn giữ được nét dịu dàng, nụ cười trong trẻo, tinh thần lạc quan và ngày càng trưởng thành, tự tin bước đi trên con đường mình đã chọn.\n\nChúc em học tập thật tốt, công việc hanh thông, luôn được mọi người yêu thương quý mến và gặp thật nhiều may mắn trong cuộc sống nhé!`,
-            closing: "Chúc em Hoa ngày 20/10 thật hạnh phúc và trọn vẹn niềm vui! 💐"
+            salutation: nfc("Gửi em Hoa dịu dàng và đáng yêu của anh/chị,"),
+            poem: nfc(`Đóa hoa xinh xắn ngát hương bay,\nChúc em ngày hội rộn vui say.\nHạnh phúc, an nhiên, đời rạng rỡ,\nTương lai tươi sáng nở từng ngày!`),
+            body: nfc(`Chúc mừng ngày 20/10 tới em Hoa thân yêu của gia đình mình!\n\nChúc Hoa một ngày lễ ngập tràn hoa tươi, lời chúc ngọt ngào và những món quà xinh xắn nhất. Chúc em luôn giữ được nét dịu dàng, nụ cười trong trẻo, tinh thần lạc quan và ngày càng trưởng thành, tự tin bước đi trên con đường mình đã chọn.\n\nChúc em học tập thật tốt, công việc hanh thông, luôn được mọi người yêu thương quý mến và gặp thật nhiều may mắn trong cuộc sống nhé!`),
+            closing: nfc("Chúc em Hoa ngày 20/10 thật hạnh phúc và trọn vẹn niềm vui! 💐")
         },
         wishesList: [
-            "Chúc em Hoa ngày 20/10 thật nhiều niềm vui, luôn tươi tắn và ngát hương như chính đóa hoa xinh đẹp!",
-            "Happy Vietnamese Women's Day em Hoa! Chúc em luôn tự tin, duyên dáng, học tập thật tốt và đạt mọi điều ước!",
-            "Chúc em Hoa một ngày 20/10 rực rỡ ngập tràn tiếng cười, luôn được yêu chiều và hạnh phúc mỗi ngày!",
-            "20/10 chúc em Hoa ngày càng xinh đẹp, thành công trong mọi dự định và luôn là niềm tự hào của gia đình!"
+            nfc("Chúc em Hoa ngày 20/10 thật nhiều niềm vui, luôn tươi tắn và ngát hương như chính đóa hoa xinh đẹp!"),
+            nfc("Happy Vietnamese Women's Day em Hoa! Chúc em luôn tự tin, duyên dáng, học tập thật tốt và đạt mọi điều ước!"),
+            nfc("Chúc em Hoa một ngày 20/10 rực rỡ ngập tràn tiếng cười, luôn được yêu chiều và hạnh phúc mỗi ngày!"),
+            nfc("20/10 chúc em Hoa ngày càng xinh đẹp, thành công trong mọi dự định và luôn là niềm tự hào của gia đình!")
         ],
-        fireworkMessage: "Chúc Em Hoa Luôn Tươi Tắn, Dịu Dàng & Thành Công!",
+        fireworkMessage: nfc("Chúc Em Hoa Luôn Tươi Tắn, Dịu Dàng & Thành Công!"),
         palette: ['#c471ed', '#12c2e9', '#f64f59', '#ffffff']
     }
 };
 
-// Flower database for bouquet builder
 const FLOWERS = [
-    { id: 'rose', name: 'Hoa Hồng Đỏ', icon: '🌹', color: '#ff2d55', meaning: 'Tình yêu nồng nàn & sự tôn kính' },
-    { id: 'sunflower', name: 'Hoa Hướng Dương', icon: '🌻', color: '#f59e0b', meaning: 'Niềm tin, hy vọng & sức sống mãnh liệt' },
-    { id: 'tulip', name: 'Hoa Tulip', icon: '🌷', color: '#ec4899', meaning: 'Sự tao nhã, kiêu sa & chân thành' },
-    { id: 'carnation', name: 'Hoa Cẩm Chướng', icon: '🌸', color: '#f43f5e', meaning: 'Lòng tri ân, biết ơn sâu nặng' },
-    { id: 'lotus', name: 'Hoa Sen Hồng', icon: '🪷', color: '#fb7185', meaning: 'Thanh cao, đoan trang & đức hy sinh' },
-    { id: 'baby', name: 'Hoa Baby Trắng', icon: '🌼', color: '#e2e8f0', meaning: 'Trong sáng, thuần khiết & tình cảm dịu êm' }
+    { id: 'rose', name: nfc('Hoa Hồng Đỏ'), icon: '🌹', color: '#ff2d55', meaning: nfc('Tình yêu nồng nàn & sự tôn kính') },
+    { id: 'sunflower', name: nfc('Hoa Hướng Dương'), icon: '🌻', color: '#f59e0b', meaning: nfc('Niềm tin, hy vọng & sức sống mãnh liệt') },
+    { id: 'tulip', name: nfc('Hoa Tulip'), icon: '🌷', color: '#ec4899', meaning: nfc('Sự tao nhã, kiêu sa & chân thành') },
+    { id: 'carnation', name: nfc('Hoa Cẩm Chướng'), icon: '🌸', color: '#f43f5e', meaning: nfc('Lòng tri ân, biết ơn sâu nặng') },
+    { id: 'lotus', name: nfc('Hoa Sen Hồng'), icon: '🪷', color: '#fb7185', meaning: nfc('Thanh cao, đoan trang & đức hy sinh') },
+    { id: 'baby', name: nfc('Hoa Baby Trắng'), icon: '🌼', color: '#e2e8f0', meaning: nfc('Trong sáng, thuần khiết & tình cảm dịu êm') }
 ];
 
-// Lucky fortune quotes
 const FORTUNES = [
-    { title: "Quẻ Đại Cát 🌟", text: "Tràn ngập 365 ngày an vui, không còn chút âu lo muộn phiền!", charm: "Thịnh Vượng & An Lành" },
-    { title: "Quẻ Trường Thọ 🍀", text: "Sức khỏe dồi dào, thân tâm an lạc, bách niên giai lão cùng con cháu!", charm: "Trường Thọ Vô Cương" },
-    { title: "Quẻ Nhan Sắc 🌺", text: "Nhan sắc mãi rạng rỡ như đóa hồng ban mai, nụ cười thắp sáng cả đất trời!", charm: "Mãi Mãi Trẻ Đẹp" },
-    { title: "Quẻ Tài Lộc 💰", text: "Quà cáp ngập tràn ngày 20/10, công danh sự nghiệp hanh thông tấn tới!", charm: "Vạn Sự Như Ý" },
-    { title: "Quẻ Yêu Thương 💖", text: "Luôn được mọi người chở che, trân trọng và đón nhận tình yêu thương đong đầy!", charm: "Hạnh Phúc Trọn Vẹn" },
-    { title: "Quẻ Ước Nguyện 🕊️", text: "Mọi lời nguyện cầu hôm nay đều được vũ trụ lắng nghe và biến thành hiện thực!", charm: "Cầu Được Ước Thấy" }
+    { title: nfc("Quẻ Đại Cát 🌟"), text: nfc("Tràn ngập 365 ngày an vui, không còn chút âu lo muộn phiền!"), charm: nfc("Thịnh Vượng & An Lành") },
+    { title: nfc("Quẻ Trường Thọ 🍀"), text: nfc("Sức khỏe dồi dào, thân tâm an lạc, bách niên giai lão cùng con cháu!"), charm: nfc("Trường Thọ Vô Cương") },
+    { title: nfc("Quẻ Nhan Sắc 🌺"), text: nfc("Nhan sắc mãi rạng rỡ như đóa hồng ban mai, nụ cười thắp sáng cả đất trời!"), charm: nfc("Mãi Mãi Trẻ Đẹp") },
+    { title: nfc("Quẻ Tài Lộc 💰"), text: nfc("Quà cáp ngập tràn ngày 20/10, công danh sự nghiệp hanh thông tấn tới!"), charm: nfc("Vạn Sự Như Ý") },
+    { title: nfc("Quẻ Yêu Thương 💖"), text: nfc("Luôn được mọi người chở che, trân trọng và đón nhận tình yêu thương đong đầy!"), charm: nfc("Hạnh Phúc Trọn Vẹn") },
+    { title: nfc("Quẻ Ước Nguyện 🕊️"), text: nfc("Mọi lời nguyện cầu hôm nay đều được vũ trụ lắng nghe và biến thành hiện thực!"), charm: nfc("Cầu Được Ước Thấy") }
 ];
 
-// Fallback in-memory wishes if backend is not started
+// Clean fallback containing only the 5 specified family members
 let localWishesFallback = [
     {
         id: 1,
-        recipient_role: "Bà Nội",
-        recipient_name: "Bà Nội kính yêu",
-        sender_name: "Cháu Hoàng",
-        message: "Nhân ngày 20/10, cháu kính chúc Bà Nội luôn mạnh khỏe, sống lâu trăm tuổi, bình an bên con cháu. Cảm ơn những câu chuyện cổ tích và tình thương bao la của Bà Nội!",
+        recipient_role: nfc("Bà Nội"),
+        recipient_name: nfc("Bà Nội kính yêu"),
+        sender_name: nfc("Cháu Hoàng"),
+        message: nfc("Nhân ngày 20/10, cháu kính chúc Bà Nội luôn mạnh khỏe, sống lâu trăm tuổi, bình an bên con cháu. Cảm ơn những câu chuyện cổ tích và tình thương bao la của Bà Nội!"),
         likes: 28,
         created_at: new Date(Date.now() - 3600000 * 5).toISOString()
     },
     {
         id: 2,
-        recipient_role: "Bà Ngoại",
-        recipient_name: "Bà Ngoại thương yêu",
-        sender_name: "Cháu Hoàng",
-        message: "Kính chúc Bà Ngoại ngày 20/10 ngập tràn niềm vui, sức khỏe dồi dào, vạn sự như ý và bách niên giai lão!",
+        recipient_role: nfc("Bà Ngoại"),
+        recipient_name: nfc("Bà Ngoại thương yêu"),
+        sender_name: nfc("Cháu Hoàng"),
+        message: nfc("Kính chúc Bà Ngoại ngày 20/10 ngập tràn niềm vui, sức khỏe dồi dào, vạn sự như ý và bách niên giai lão!"),
         likes: 25,
         created_at: new Date(Date.now() - 3600000 * 4).toISOString()
     },
     {
         id: 3,
-        recipient_role: "Mẹ Thắm",
-        recipient_name: "Mẹ Thắm yêu dấu",
-        sender_name: "Con yêu",
-        message: "Chúc Mẹ Thắm một ngày 20/10 ngập tràn nụ cười và hạnh phúc! Cả đời mẹ đã vất vả vì chúng con, con chỉ mong Mẹ Thắm luôn an yên, trẻ đẹp và tự hào về con!",
+        recipient_role: nfc("Mẹ Thắm"),
+        recipient_name: nfc("Mẹ Thắm yêu dấu"),
+        sender_name: nfc("Con yêu"),
+        message: nfc("Chúc Mẹ Thắm một ngày 20/10 ngập tràn nụ cười và hạnh phúc! Cả đời mẹ đã vất vả vì chúng con, con chỉ mong Mẹ Thắm luôn an yên, trẻ đẹp và tự hào về con!"),
         likes: 68,
         created_at: new Date(Date.now() - 3600000 * 3).toISOString()
     },
     {
         id: 4,
-        recipient_role: "Hân Bò",
-        recipient_name: "Em Hân Bò",
-        sender_name: "Anh hai",
-        message: "Chúc em Hân Bò 20/10 nhận được cả núi quà, ngày càng xinh xắn, bớt lì, thi đâu đỗ đó và luôn tươi cười nhé!",
+        recipient_role: nfc("Hân Bò"),
+        recipient_name: nfc("Em Hân Bò"),
+        sender_name: nfc("Anh hai"),
+        message: nfc("Chúc em Hân Bò 20/10 nhận được cả núi quà, ngày càng xinh xắn, bớt lì, thi đâu đỗ đó và luôn tươi cười nhé!"),
         likes: 39,
         created_at: new Date(Date.now() - 3600000 * 2).toISOString()
     },
     {
         id: 5,
-        recipient_role: "Hoa",
-        recipient_name: "Em Hoa",
-        sender_name: "Anh hai",
-        message: "Chúc em Hoa ngày 20/10 thật nhiều niềm vui, luôn tươi tắn dịu dàng như hoa, học giỏi và gặp nhiều may mắn!",
+        recipient_role: nfc("Hoa"),
+        recipient_name: nfc("Em Hoa"),
+        sender_name: nfc("Anh hai"),
+        message: nfc("Chúc em Hoa ngày 20/10 thật nhiều niềm vui, luôn tươi tắn dịu dàng như hoa, học giỏi và gặp nhiều may mắn!"),
         likes: 36,
         created_at: new Date(Date.now() - 3600000 * 1).toISOString()
     }
@@ -188,9 +189,12 @@ class App {
         this.openedGifts = new Set();
         this.currentWallRole = 'all';
         this.backendAvailable = false;
+        this.currentWishesCache = [];
 
         this.initDOM();
         this.bindEvents();
+        this.setupSettingsModal();
+        this.setupEditModal();
         this.renderBouquet();
         this.checkBackendAndLoad();
     }
@@ -214,7 +218,6 @@ class App {
     }
 
     bindEvents() {
-        // Music Toggle
         this.musicToggleBtn.addEventListener('click', () => {
             const isPlaying = window.soundEngine.toggleMusic((active) => {
                 this.updateMusicUI(active);
@@ -222,7 +225,6 @@ class App {
             this.showToast(isPlaying ? "🎵 Đang phát bài hát về Mẹ" : "🔇 Đã tạm dừng nhạc");
         });
 
-        // Fullscreen Fireworks Show
         let celebrationActive = false;
         this.fireworkShowBtn.addEventListener('click', () => {
             celebrationActive = !celebrationActive;
@@ -244,7 +246,6 @@ class App {
             }
         });
 
-        // Close Envelope Modal
         document.getElementById('close-modal-btn').addEventListener('click', () => {
             this.closeEnvelopeModal();
         });
@@ -255,12 +256,10 @@ class App {
             }
         });
 
-        // Envelope Flap / Wax Seal click
         document.getElementById('wax-seal-btn').addEventListener('click', () => {
             this.openEnvelopeLetter();
         });
 
-        // Quick recipient switch inside modal
         document.querySelectorAll('.modal-recipient-tab').forEach(tab => {
             tab.addEventListener('click', (e) => {
                 const targetKey = e.currentTarget.dataset.recipient;
@@ -268,14 +267,12 @@ class App {
             });
         });
 
-        // Copy letter inside modal
         document.getElementById('copy-letter-btn').addEventListener('click', () => {
             const data = WISHES_DATA[this.currentRecipient];
             const fullText = `${data.letter.salutation}\n\n${data.letter.poem}\n\n${data.letter.body}\n\n${data.letter.closing}`;
             this.copyToClipboard(fullText, "💌 Đã sao chép toàn bộ bức thư!");
         });
 
-        // Firework tribute from modal
         document.getElementById('modal-firework-tribute-btn').addEventListener('click', () => {
             const data = WISHES_DATA[this.currentRecipient];
             window.particleCanvas.launchSpecialTribute(data.role, data.fireworkMessage, data.palette);
@@ -283,10 +280,218 @@ class App {
             this.showToast(`🎆 Đã bắn pháo hoa chúc mừng ${data.role}!`);
         });
 
-        // Submit wish to Backend Wall
         document.getElementById('btn-submit-to-wall').addEventListener('click', () => {
             this.submitWishToBackend();
         });
+    }
+
+    // ----------------- Settings & Management -----------------
+    setupSettingsModal() {
+        const settingsModal = document.getElementById('settings-modal');
+        const openBtn = document.getElementById('open-settings-btn');
+        const closeBtn = document.getElementById('close-settings-modal-btn');
+        const footerCloseBtn = document.getElementById('close-settings-footer-btn');
+
+        const openSettings = () => {
+            settingsModal.classList.remove('hidden');
+            settingsModal.classList.add('flex');
+            const countEl = document.getElementById('settings-wishes-count');
+            if (countEl) countEl.innerText = `${this.currentWishesCache.length} lời chúc`;
+        };
+
+        const closeSettings = () => {
+            settingsModal.classList.add('hidden');
+            settingsModal.classList.remove('flex');
+        };
+
+        if (openBtn) openBtn.addEventListener('click', openSettings);
+        if (closeBtn) closeBtn.addEventListener('click', closeSettings);
+        if (footerCloseBtn) footerCloseBtn.addEventListener('click', closeSettings);
+
+        settingsModal.addEventListener('click', (e) => {
+            if (e.target === settingsModal) closeSettings();
+        });
+
+        // Reset to 5 family members button
+        document.getElementById('btn-reset-default-wishes').addEventListener('click', async () => {
+            if (confirm("Bạn có chắc muốn làm sạch danh sách và khôi phục đúng 5 người thân yêu (Bà Nội, Bà Ngoại, Mẹ Thắm, Hân Bò, Hoa)?")) {
+                if (this.backendAvailable) {
+                    try {
+                        const res = await fetch(`${API_BASE}/api/wishes/reset-defaults`, { method: 'POST' });
+                        if (res.ok) {
+                            this.showToast("✨ Đã khôi phục thành công 5 người thân yêu!");
+                            await this.loadWallWishes();
+                            await this.loadBackendStats();
+                            closeSettings();
+                            return;
+                        }
+                    } catch (e) {}
+                }
+                // Offline fallback
+                localWishesFallback = [
+                    {
+                        id: 1,
+                        recipient_role: nfc("Bà Nội"),
+                        recipient_name: nfc("Bà Nội kính yêu"),
+                        sender_name: nfc("Cháu Hoàng"),
+                        message: nfc("Nhân ngày 20/10, cháu kính chúc Bà Nội luôn mạnh khỏe, sống lâu trăm tuổi, bình an bên con cháu!"),
+                        likes: 28,
+                        created_at: new Date().toISOString()
+                    },
+                    {
+                        id: 2,
+                        recipient_role: nfc("Bà Ngoại"),
+                        recipient_name: nfc("Bà Ngoại thương yêu"),
+                        sender_name: nfc("Cháu Hoàng"),
+                        message: nfc("Kính chúc Bà Ngoại ngày 20/10 ngập tràn niềm vui, sức khỏe dồi dào, vạn sự như ý!"),
+                        likes: 25,
+                        created_at: new Date().toISOString()
+                    },
+                    {
+                        id: 3,
+                        recipient_role: nfc("Mẹ Thắm"),
+                        recipient_name: nfc("Mẹ Thắm yêu dấu"),
+                        sender_name: nfc("Con yêu"),
+                        message: nfc("Chúc Mẹ Thắm một ngày 20/10 ngập tràn nụ cười và hạnh phúc! Mẹ luôn là người phụ nữ tuyệt vời nhất của con!"),
+                        likes: 68,
+                        created_at: new Date().toISOString()
+                    },
+                    {
+                        id: 4,
+                        recipient_role: nfc("Hân Bò"),
+                        recipient_name: nfc("Em Hân Bò"),
+                        sender_name: nfc("Anh hai"),
+                        message: nfc("Chúc em Hân Bò 20/10 nhận được cả núi quà, ngày càng xinh xắn, bớt lì và thi đâu đỗ đó nhé!"),
+                        likes: 39,
+                        created_at: new Date().toISOString()
+                    },
+                    {
+                        id: 5,
+                        recipient_role: nfc("Hoa"),
+                        recipient_name: nfc("Em Hoa"),
+                        sender_name: nfc("Anh hai"),
+                        message: nfc("Chúc em Hoa ngày 20/10 thật nhiều niềm vui, luôn tươi tắn dịu dàng như hoa và gặp nhiều may mắn!"),
+                        likes: 36,
+                        created_at: new Date().toISOString()
+                    }
+                ];
+                this.renderWallCards(localWishesFallback);
+                this.showToast("✨ Đã khôi phục thành công 5 người thân yêu!");
+                closeSettings();
+            }
+        });
+
+        // Volume slider
+        const volSlider = document.getElementById('volume-slider');
+        const volLabel = document.getElementById('volume-label');
+        if (volSlider) {
+            volSlider.addEventListener('input', (e) => {
+                const val = e.target.value;
+                volLabel.innerText = `${val}%`;
+                if (window.soundEngine) {
+                    window.soundEngine.setVolume(val / 100);
+                }
+            });
+        }
+
+        // Petals & fireworks toggles
+        const petalsCb = document.getElementById('toggle-petals-cb');
+        if (petalsCb) {
+            petalsCb.addEventListener('change', (e) => {
+                if (window.particleCanvas) {
+                    window.particleCanvas.showPetals = e.target.checked;
+                }
+            });
+        }
+        const fwCb = document.getElementById('toggle-auto-fireworks-cb');
+        if (fwCb) {
+            fwCb.addEventListener('change', (e) => {
+                if (window.particleCanvas) {
+                    window.particleCanvas.enableAutoFireworks = e.target.checked;
+                }
+            });
+        }
+    }
+
+    // ----------------- Edit Wish Modal -----------------
+    setupEditModal() {
+        const editModal = document.getElementById('edit-wish-modal');
+        const closeBtn = document.getElementById('close-edit-modal-btn');
+        const cancelBtn = document.getElementById('cancel-edit-btn');
+        const saveBtn = document.getElementById('save-edit-btn');
+
+        const closeEdit = () => {
+            editModal.classList.add('hidden');
+            editModal.classList.remove('flex');
+        };
+
+        if (closeBtn) closeBtn.addEventListener('click', closeEdit);
+        if (cancelBtn) cancelBtn.addEventListener('click', closeEdit);
+        editModal.addEventListener('click', (e) => {
+            if (e.target === editModal) closeEdit();
+        });
+
+        if (saveBtn) {
+            saveBtn.addEventListener('click', async () => {
+                const id = parseInt(document.getElementById('edit-wish-id').value);
+                const role = nfc(document.getElementById('edit-recipient-role').value);
+                const name = nfc(document.getElementById('edit-recipient-name').value.trim());
+                const msg = nfc(document.getElementById('edit-wish-message').value.trim());
+                const sender = nfc(document.getElementById('edit-sender-name').value.trim());
+
+                if (!name || !msg) {
+                    this.showToast("Vui lòng điền đủ tên người nhận và nội dung!");
+                    return;
+                }
+
+                const payload = {
+                    recipient_role: role,
+                    recipient_name: name,
+                    message: msg,
+                    sender_name: sender || "Người gửi"
+                };
+
+                if (this.backendAvailable) {
+                    try {
+                        const res = await fetch(`${API_BASE}/api/wishes/${id}`, {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (res.ok) {
+                            this.showToast("✨ Đã cập nhật lời chúc thành công!");
+                            closeEdit();
+                            await this.loadWallWishes();
+                            return;
+                        }
+                    } catch (e) {}
+                }
+
+                // Fallback local update
+                const item = localWishesFallback.find(w => w.id === id);
+                if (item) {
+                    item.recipient_role = role;
+                    item.recipient_name = name;
+                    item.message = msg;
+                    item.sender_name = payload.sender_name;
+                }
+                this.renderWallCards(localWishesFallback);
+                this.showToast("✨ Đã cập nhật lời chúc thành công!");
+                closeEdit();
+            });
+        }
+    }
+
+    openEditModal(wish) {
+        document.getElementById('edit-wish-id').value = wish.id;
+        document.getElementById('edit-recipient-role').value = wish.recipient_role;
+        document.getElementById('edit-recipient-name').value = wish.recipient_name;
+        document.getElementById('edit-wish-message').value = wish.message;
+        document.getElementById('edit-sender-name').value = wish.sender_name;
+
+        const editModal = document.getElementById('edit-wish-modal');
+        editModal.classList.remove('hidden');
+        editModal.classList.add('flex');
     }
 
     // ----------------- Backend Integration -----------------
@@ -302,15 +507,12 @@ class App {
                     `;
                     this.backendBadge.className = "hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-400/30";
                 }
-                this.loadBackendStats();
-                this.loadWallWishes();
+                await this.loadBackendStats();
+                await this.loadWallWishes();
                 return;
             }
-        } catch (e) {
-            console.log("Running in offline client mode or backend not yet reached.");
-        }
+        } catch (e) {}
 
-        // Fallback offline mode
         this.backendAvailable = false;
         if (this.backendBadge) {
             this.backendBadge.innerHTML = `
@@ -325,6 +527,7 @@ class App {
             total_bouquets: 64,
             total_hearts: 520
         });
+        this.currentWishesCache = localWishesFallback;
         this.renderWallCards(localWishesFallback);
     }
 
@@ -369,9 +572,11 @@ class App {
             const res = await fetch(url);
             if (res.ok) {
                 const wishes = await res.json();
+                this.currentWishesCache = wishes;
                 this.renderWallCards(wishes);
             }
         } catch (e) {
+            this.currentWishesCache = localWishesFallback;
             this.renderWallCards(localWishesFallback);
         }
     }
@@ -388,7 +593,7 @@ class App {
                 } else {
                     const filtered = this.currentWallRole === 'all' 
                         ? localWishesFallback 
-                        : localWishesFallback.filter(w => w.recipient_role === this.currentWallRole);
+                        : localWishesFallback.filter(w => w.recipient_role.includes(this.currentWallRole));
                     this.renderWallCards(filtered);
                 }
             });
@@ -436,20 +641,57 @@ class App {
                         "${w.message}"
                     </p>
                 </div>
-                <div class="pt-3 border-t border-white/10 flex items-center justify-between">
-                    <div class="text-[11px] text-amber-200/80 font-medium">
+                <div class="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+                    <div class="text-[11px] text-amber-200/80 font-medium truncate flex-1">
                         Ký tên: <span class="text-white">${w.sender_name}</span>
                     </div>
-                    <button class="like-wish-btn flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/20 hover:bg-rose-500/40 text-rose-200 text-xs font-semibold transition-all active:scale-95" data-id="${w.id}">
-                        <span>❤️</span>
-                        <span class="like-count">${w.likes || 0}</span>
-                    </button>
+                    <!-- Actions: Like, Edit, Delete -->
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <button class="like-wish-btn flex items-center gap-1 px-2.5 py-1 rounded-full bg-rose-500/20 hover:bg-rose-500/40 text-rose-200 text-xs font-semibold transition-all active:scale-95" data-id="${w.id}" title="Thả tim">
+                            <span>❤️</span>
+                            <span class="like-count">${w.likes || 0}</span>
+                        </button>
+                        <button class="edit-wish-btn px-2.5 py-1 rounded-full bg-blue-500/20 hover:bg-blue-500/40 text-blue-200 text-xs font-medium transition-all active:scale-95 flex items-center gap-1" title="Chỉnh sửa lời chúc">
+                            <span>✏️</span> Sửa
+                        </button>
+                        <button class="delete-wish-btn px-2.5 py-1 rounded-full bg-red-500/20 hover:bg-red-500/40 text-red-200 text-xs font-medium transition-all active:scale-95 flex items-center gap-1" title="Xóa lời chúc này">
+                            <span>🗑️</span> Xóa
+                        </button>
+                    </div>
                 </div>
             `;
 
+            // Like action
             const likeBtn = card.querySelector('.like-wish-btn');
             likeBtn.addEventListener('click', () => {
                 this.handleLikeWish(w.id, likeBtn);
+            });
+
+            // Edit action
+            const editBtn = card.querySelector('.edit-wish-btn');
+            editBtn.addEventListener('click', () => {
+                this.openEditModal(w);
+            });
+
+            // Delete action
+            const deleteBtn = card.querySelector('.delete-wish-btn');
+            deleteBtn.addEventListener('click', async () => {
+                if (confirm(`Bạn có chắc muốn xóa lời chúc gửi đến "${w.recipient_name}" không?`)) {
+                    card.classList.add('wish-card-fading');
+                    setTimeout(async () => {
+                        if (this.backendAvailable) {
+                            try {
+                                await fetch(`${API_BASE}/api/wishes/${w.id}`, { method: 'DELETE' });
+                                this.loadBackendStats();
+                                this.loadWallWishes();
+                            } catch (e) {}
+                        } else {
+                            localWishesFallback = localWishesFallback.filter(item => item.id !== w.id);
+                            this.renderWallCards(localWishesFallback);
+                        }
+                        this.showToast("🗑️ Đã xóa lời chúc thành công!");
+                    }, 250);
+                }
             });
 
             grid.appendChild(card);
@@ -480,10 +722,10 @@ class App {
     }
 
     async submitWishToBackend() {
-        const role = document.getElementById('select-role').value;
-        const recipient = document.getElementById('input-recipient').value.trim();
-        const message = document.getElementById('input-message').value.trim();
-        const sender = document.getElementById('input-sender').value.trim();
+        const role = nfc(document.getElementById('select-role').value);
+        const recipient = nfc(document.getElementById('input-recipient').value.trim());
+        const message = nfc(document.getElementById('input-message').value.trim());
+        const sender = nfc(document.getElementById('input-sender').value.trim());
 
         if (!recipient) {
             this.showToast("Vui lòng nhập tên người nhận!");
@@ -509,7 +751,6 @@ class App {
                     body: JSON.stringify(payload)
                 });
                 if (res.ok) {
-                    const newWish = await res.json();
                     this.showToast("✨ Lời chúc đã được lưu vào hệ thống!");
                     window.particleCanvas.launchSpecialTribute(role, `Lời Chúc Tới ${recipient} Đã Được Lưu!`, ['#ff4b72', '#ffd700', '#12c2e9']);
                     this.loadWallWishes();
@@ -519,7 +760,6 @@ class App {
             } catch (e) {}
         }
 
-        // Offline fallback
         const offlineWish = {
             id: Date.now(),
             ...payload,
@@ -550,7 +790,6 @@ class App {
             const data = WISHES_DATA[key];
             if (!data) return;
 
-            // Open letter button
             const openLetterBtn = document.getElementById(`btn-open-letter-${key}`);
             if (openLetterBtn) {
                 openLetterBtn.addEventListener('click', () => {
@@ -558,7 +797,6 @@ class App {
                 });
             }
 
-            // Launch tribute firework button
             const tributeBtn = document.getElementById(`btn-tribute-${key}`);
             if (tributeBtn) {
                 tributeBtn.addEventListener('click', () => {
@@ -568,7 +806,6 @@ class App {
                 });
             }
 
-            // Populate curated wishes
             const wishesContainer = document.getElementById(`wishes-list-${key}`);
             if (wishesContainer) {
                 wishesContainer.innerHTML = '';
@@ -576,7 +813,7 @@ class App {
                     const wishItem = document.createElement('div');
                     wishItem.className = 'wish-item p-3 rounded-xl bg-white/5 border border-white/10 hover:border-rose-400/50 hover:bg-white/10 transition-all flex items-start justify-between gap-2.5 text-xs sm:text-sm leading-relaxed';
                     wishItem.innerHTML = `
-                        <div class="flex-1 text-rose-100">
+                        <div class="flex-1 text-rose-100 font-sans">
                             <span class="inline-block text-rose-400 font-semibold mr-1">#${idx + 1}</span> ${wish}
                         </div>
                         <button class="copy-wish-btn shrink-0 px-2 py-1 rounded-lg bg-rose-500/20 hover:bg-rose-500/40 text-rose-200 hover:text-white transition-all text-xs flex items-center gap-1 active:scale-95" title="Sao chép lời chúc">
@@ -628,7 +865,6 @@ class App {
         const data = WISHES_DATA[this.currentRecipient];
         if (!data) return;
 
-        // Highlight tab
         document.querySelectorAll('.modal-recipient-tab').forEach(tab => {
             if (tab.dataset.recipient === this.currentRecipient) {
                 tab.classList.add('active-tab');
@@ -637,11 +873,9 @@ class App {
             }
         });
 
-        // Set seal title
         document.getElementById('seal-recipient-name').innerText = data.role;
         document.getElementById('envelope-recipient-tag').innerText = `Gửi tặng: ${data.role} 💖`;
 
-        // Letter contents
         document.getElementById('letter-salutation').innerText = data.letter.salutation;
         document.getElementById('letter-poem').innerText = data.letter.poem;
         document.getElementById('letter-body').innerText = data.letter.body;
@@ -827,20 +1061,20 @@ class App {
         selectRole.addEventListener('change', () => {
             const role = selectRole.value;
             if (role === 'Bà Nội') {
-                inputRecipient.value = 'Bà Nội kính yêu';
-                inputMessage.value = 'Kính chúc Bà Nội luôn dồi dào sức khỏe, sống lâu trăm tuổi, bách niên giai lão và bình an bên con cháu!';
+                inputRecipient.value = nfc('Bà Nội kính yêu');
+                inputMessage.value = nfc('Kính chúc Bà Nội luôn dồi dào sức khỏe, sống lâu trăm tuổi, bách niên giai lão và bình an bên con cháu!');
             } else if (role === 'Bà Ngoại') {
-                inputRecipient.value = 'Bà Ngoại thương yêu';
-                inputMessage.value = 'Chúc Bà Ngoại ngày 20/10 ngập tràn niềm vui, thọ tỷ Nam Sơn, nụ cười hiền từ lúc nào cũng rạng rỡ!';
+                inputRecipient.value = nfc('Bà Ngoại thương yêu');
+                inputMessage.value = nfc('Chúc Bà Ngoại ngày 20/10 ngập tràn niềm vui, thọ tỷ Nam Sơn, nụ cười hiền từ lúc nào cũng rạng rỡ!');
             } else if (role === 'Mẹ Thắm') {
-                inputRecipient.value = 'Mẹ Thắm yêu dấu';
-                inputMessage.value = 'Chúc Mẹ Thắm 20/10 ngập tràn niềm vui, trẻ mãi không già, luôn hạnh phúc và tự hào về chúng con!';
+                inputRecipient.value = nfc('Mẹ Thắm yêu dấu');
+                inputMessage.value = nfc('Chúc Mẹ Thắm 20/10 ngập tràn niềm vui, trẻ mãi không già, luôn hạnh phúc và tự hào về chúng con!');
             } else if (role === 'Hân Bò') {
-                inputRecipient.value = 'Em Hân Bò';
-                inputMessage.value = 'Chúc Hân Bò 20/10 nhận được cả núi quà, ngày càng xinh gái, bớt lì, học giỏi và luôn vui vẻ!';
+                inputRecipient.value = nfc('Em Hân Bò');
+                inputMessage.value = nfc('Chúc Hân Bò 20/10 nhận được cả núi quà, ngày càng xinh gái, bớt lì, học giỏi và luôn vui vẻ!');
             } else if (role === 'Hoa') {
-                inputRecipient.value = 'Em Hoa';
-                inputMessage.value = 'Chúc em Hoa ngày 20/10 thật nhiều niềm vui, luôn tươi tắn dịu dàng như hoa và thành công rực rỡ!';
+                inputRecipient.value = nfc('Em Hoa');
+                inputMessage.value = nfc('Chúc em Hoa ngày 20/10 thật nhiều niềm vui, luôn tươi tắn dịu dàng như hoa và thành công rực rỡ!');
             }
             updatePreview();
         });

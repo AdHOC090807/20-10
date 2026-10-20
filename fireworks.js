@@ -19,6 +19,8 @@ class ParticleCanvas {
 
         this.autoFireworks = false;
         this.autoInterval = null;
+        this.showPetals = true;
+        this.enableAutoFireworks = true;
         this.petalCount = 24; // Optimized for silky smooth 60fps
         this.maxParticles = 180; // Strict particle cap to prevent any lag
         this.lastLaunchTime = 0;
@@ -66,7 +68,7 @@ class ParticleCanvas {
 
         // Occasional ambient single firework
         setInterval(() => {
-            if (!this.autoFireworks && Math.random() < 0.35 && this.rockets.length < 2) {
+            if (this.enableAutoFireworks && !this.autoFireworks && Math.random() < 0.35 && this.rockets.length < 2) {
                 const targetX = this.width * (0.2 + Math.random() * 0.6);
                 const targetY = this.height * (0.15 + Math.random() * 0.35);
                 this.launchRocket(targetX, targetY);
@@ -337,6 +339,8 @@ class ParticleCanvas {
 
         // --- Render Falling Rose Petals ---
         this.petalCtx.clearRect(0, 0, this.width, this.height);
+
+        if (!this.showPetals) return;
 
         for (let i = 0; i < this.petals.length; i++) {
             const pt = this.petals[i];
