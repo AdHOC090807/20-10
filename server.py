@@ -61,43 +61,51 @@ def init_db():
     if count == 0:
         sample_wishes = [
             (
-                "Bà",
+                "Bà Nội",
                 "Bà Nội kính yêu",
                 "Cháu Hoàng",
-                "Nhân ngày 20/10, cháu kính chúc Bà luôn mạnh khỏe, sống lâu trăm tuổi, bình an bên con cháu. Cảm ơn những câu chuyện cổ tích và tình thương bao la của Bà!",
-                18,
+                "Nhân ngày 20/10, cháu kính chúc Bà Nội luôn mạnh khỏe, sống lâu trăm tuổi, bình an bên con cháu. Cảm ơn những câu chuyện cổ tích và tình thương bao la của Bà Nội!",
+                28,
                 (datetime.datetime.now() - datetime.timedelta(hours=5)).isoformat()
             ),
             (
-                "Mẹ",
-                "Mẹ Lan thương yêu",
-                "Con trai út",
-                "Chúc Mẹ yêu của con một ngày 20/10 ngập tràn nụ cười và niềm vui! Cả đời mẹ đã vất vả vì chúng con, con chỉ mong mẹ luôn an yên, trẻ đẹp và tự hào về con!",
-                42,
+                "Bà Ngoại",
+                "Bà Ngoại thương yêu",
+                "Cháu Hoàng",
+                "Kính chúc Bà Ngoại ngày 20/10 ngập tràn niềm vui, sức khỏe dồi dào, vạn sự như ý và bách niên giai lão!",
+                25,
+                (datetime.datetime.now() - datetime.timedelta(hours=4)).isoformat()
+            ),
+            (
+                "Mẹ Thắm",
+                "Mẹ Thắm yêu dấu",
+                "Con yêu",
+                "Chúc Mẹ Thắm một ngày 20/10 ngập tràn nụ cười và hạnh phúc! Cả đời mẹ đã vất vả vì chúng con, con chỉ mong Mẹ Thắm luôn an yên, trẻ đẹp và tự hào về con!",
+                68,
                 (datetime.datetime.now() - datetime.timedelta(hours=3)).isoformat()
             ),
             (
-                "Em gái",
-                "Bé Bống dễ thương",
+                "Hân Bò",
+                "Em Hân Bò",
                 "Anh hai",
-                "Chúc em gái 20/10 xinh xắn, rạng rỡ, học giỏi, thi đâu đỗ đó và sớm đạt được mọi ước mơ nhé! Quà của anh gửi về sau nha!",
-                29,
-                (datetime.datetime.now() - datetime.timedelta(hours=1)).isoformat()
+                "Chúc em Hân Bò 20/10 nhận được cả núi quà, ngày càng xinh xắn, bớt lì, thi đâu đỗ đó và luôn tươi cười nhé!",
+                39,
+                (datetime.datetime.now() - datetime.timedelta(hours=2)).isoformat()
             ),
             (
-                "Mẹ",
-                "Mẹ Yêu Dấu",
-                "Con gái Thảo",
-                "Gửi ngàn lời chúc tốt đẹp nhất đến người phụ nữ tuyệt vời nhất cuộc đời con. Con yêu Mẹ rất nhiều!",
-                35,
-                (datetime.datetime.now() - datetime.timedelta(minutes=30)).isoformat()
+                "Hoa",
+                "Em Hoa",
+                "Anh hai",
+                "Chúc em Hoa ngày 20/10 thật nhiều niềm vui, luôn tươi tắn dịu dàng như hoa, học giỏi và gặp nhiều may mắn!",
+                36,
+                (datetime.datetime.now() - datetime.timedelta(hours=1)).isoformat()
             )
         ]
         cursor.executemany(
             "INSERT INTO wishes (recipient_role, recipient_name, sender_name, message, likes, created_at) VALUES (?, ?, ?, ?, ?, ?)",
             sample_wishes
         )
-        cursor.execute("UPDATE site_stats SET value = value + 4 WHERE key = 'total_wishes'")
+        cursor.execute("UPDATE site_stats SET value = value + 5 WHERE key = 'total_wishes'")
 
     conn.commit()
     conn.close()

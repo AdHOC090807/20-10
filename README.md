@@ -1,6 +1,6 @@
 # 🌹 Ứng Dụng Full-Stack Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10
 
-Ứng dụng web Full-Stack hoàn chỉnh, cao cấp và tương tác trực quan tôn vinh ba người phụ nữ thân thương nhất: **Bà**, **Mẹ** và **Em gái** nhân ngày 20 - 10.
+Ứng dụng web Full-Stack cao cấp và tương tác trực quan tôn vinh những người phụ nữ yêu thương trong gia đình: **Bà Nội**, **Bà Ngoại**, **Mẹ Thắm**, cùng hai em gái **Hân Bò** và **Hoa** nhân ngày 20 - 10.
 
 ---
 

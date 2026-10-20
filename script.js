@@ -5,71 +5,110 @@ const API_BASE = (window.location.protocol === 'file:' || !window.location.port)
     : '';
 
 const WISHES_DATA = {
-    ba: {
-        role: "Bà Kính Yêu",
-        title: "Kính Chúc Bà - Cội Nguồn Bình Yên Của Cả Gia Đình",
+    banoi: {
+        role: "Bà Nội Kính Yêu",
+        title: "Kính Chúc Bà Nội - Cội Nguồn Bình An & Phúc Thọ",
         avatar: "👵",
-        badge: "Kính Yêu & Trường Thọ",
-        shortDesc: "Bàn tay ấm áp và những câu chuyện cổ tích chở che cả tuổi thơ con.",
-        envelopeColor: "#d97706",
+        badge: "Bà Nội Kính Yêu",
+        shortDesc: "Bàn tay ấm áp chở che tháng ngày, câu chuyện cổ tích nuôi lớn tuổi thơ con.",
         letter: {
-            salutation: "Kính gửi Bà kính yêu của cháu,",
-            poem: `Nắng vàng trải nhẹ lối thu sang,\nTháng Mười rộn rã đón ngày vàng.\nKính chúc Bà yêu muôn sức khỏe,\nAn lành, hạnh phúc mãi thênh thang!`,
-            body: `Nhân ngày Phụ nữ Việt Nam 20/10, cháu muốn gửi trọn tấm lòng kính trọng và biết ơn sâu sắc nhất tới Bà. Cảm ơn Bà vì đã dành trọn cả cuộc đời tần tảo, hy sinh cho con cháu. Những câu chuyện cổ tích ngày thơ bé, lời ru êm đềm và bàn tay ấm áp của Bà là hành trang quý giá nhất sưởi ấm tâm hồn cháu trên mỗi bước đường trưởng thành.\n\nCháu chỉ mong sao Bà luôn dồi dào sức khỏe, sống vui tươi, thanh thản bên con cháu, mãi là bóng mát đại thụ chở che cho cả gia đình mình!`,
-            closing: "Cháu của Bà thương yêu và kính trọng rất nhiều! ❤️"
+            salutation: "Kính gửi Bà Nội kính yêu của cháu,",
+            poem: `Nắng vàng trải nhẹ lối thu sang,\nTháng Mười rộn rã đón ngày vàng.\nKính chúc Bà Nội muôn sức khỏe,\nAn lành, thọ tỷ tựa Nam Sơn!`,
+            body: `Nhân ngày Phụ nữ Việt Nam 20/10, chúng cháu muốn gửi trọn tấm lòng hiếu kính và biết ơn sâu sắc nhất tới Bà Nội. Cảm ơn Bà Nội vì đã dành trọn cả cuộc đời tần tảo, hy sinh vì con vì cháu. Những câu chuyện cổ tích ngày ấu thơ, lời ru ấm áp và tình thương bao la của Bà Nội là điểm tựa tinh thần quý giá nhất của cả gia đình.\n\nCháu kính chúc Bà Nội luôn dồi dào sức khỏe, sống vui tươi, thanh thản bên con cháu, mãi là cây cao bóng cả che chở cho đại gia đình mình!`,
+            closing: "Cháu của Bà Nội yêu quý và kính trọng rất nhiều! ❤️"
         },
         wishesList: [
-            "Nhân ngày 20/10, con/cháu kính chúc Bà luôn mạnh khỏe, sống lâu trăm tuổi, an yên hạnh phúc bên con cháu. Bà luôn là niềm tự hào và điểm tựa vững chãi nhất của cả gia đình!",
-            "Kính chúc Bà yêu ngày Phụ nữ Việt Nam tràn ngập niềm vui! Cháu mong Bà luôn ăn ngon miệng, ngủ đẫy giấc, nụ cười hiền từ lúc nào cũng rạng rỡ trên môi.",
-            "Bà ơi, ngày 20/10 chúng cháu kính chúc Bà vạn sự an khang, bách niên giai lão. Cảm ơn tình thương bao la trời biển mà Bà đã luôn dành cho chúng con suốt bao năm qua!",
-            "Con kính chúc Bà một ngày 20/10 ấm áp và hạnh phúc. Cảm ơn những bữa cơm ngon của Bà, những lời dạy bảo ân cần nuôi lớn tâm hồn chúng con thành người."
+            "Nhân ngày 20/10, con/cháu kính chúc Bà Nội luôn mạnh khỏe, sống lâu trăm tuổi, bình an và hạnh phúc bên con cháu!",
+            "Kính chúc Bà Nội một ngày 20/10 thật nhiều niềm vui! Cháu mong Bà Nội ăn ngon miệng, ngủ ngon giấc và nụ cười hiền từ luôn nở trên môi.",
+            "Bà Nội ơi, cả nhà kính chúc Bà Nội phúc như Đông Hải, thọ tỷ Nam Sơn, mãi là chỗ dựa tinh thần vững chãi cho chúng con!",
+            "Con kính chúc Bà Nội ngày lễ 20/10 ngập tràn an yên. Cảm ơn tình thương bao la trời biển mà Bà Nội luôn dành cho chúng con!"
         ],
-        fireworkMessage: "Kính Chúc Bà Sống Lâu Trăm Tuổi - Vạn Điều Bình An!",
+        fireworkMessage: "Kính Chúc Bà Nội Bách Niên Giai Lão - Muôn Đời Bình An!",
         palette: ['#ffd700', '#ffae19', '#fff275', '#ffffff']
     },
-    me: {
-        role: "Mẹ Yêu Dấu",
-        title: "Kính Chúc Mẹ - Vầng Thái Dương Ấm Áp Của Đời Con",
-        avatar: "👩‍🦰",
-        badge: "Thiêng Liêng & Bất Tận",
-        shortDesc: "Cả đời vì con mà không quản nhọc nhằn, vòng tay Mẹ là nơi bình yên nhất.",
-        envelopeColor: "#e11d48",
+    bangoai: {
+        role: "Bà Ngoại Thương Yêu",
+        title: "Kính Chúc Bà Ngoại - Vòng Tay Yêu Thương Bất Tận",
+        avatar: "👵",
+        badge: "Bà Ngoại Thương Yêu",
+        shortDesc: "Tình thương êm dịu ngọt ngào, những món quà quê nuôi dưỡng tâm hồn con.",
         letter: {
-            salutation: "Mẹ yêu dấu của con,",
-            poem: `Đi khắp thế gian không ai tốt bằng Mẹ,\nGánh nặng cuộc đời không ai khổ bằng Cha.\nNước biển mênh mông không đong đầy tình Mẹ,\nMây trời lồng lộng không phủ kín công Cha.`,
-            body: `Mẹ ơi, hôm nay là ngày 20/10 - ngày tôn vinh những người phụ nữ tuyệt vời, và trong lòng con, Mẹ luôn là người phụ nữ đẹp nhất, vĩ đại nhất trần đời!\n\nCon cảm ơn Mẹ vì bao năm tháng nhọc nhằn đã chăm sóc, yêu thương con vô điều kiện. Cảm ơn những bữa cơm ấm nóng sau mỗi chiều muộn, những lời dặn dò đầy lo lắng mỗi khi con đi xa. Con biết Mẹ đã vì chúng con mà hy sinh thanh xuân và ước mơ riêng nhiều đến nhường nào.\n\nNhân ngày đặc biệt này, con chẳng mong gì hơn ngoài việc Mẹ luôn khỏe mạnh, mỗi ngày trôi qua đều nhẹ nhõm, vui vẻ, bớt đi những âu lo và mãi giữ nét trẻ trung, yêu đời!`,
-            closing: "Con yêu Mẹ nhiều hơn ngàn lời nói! Yêu Mẹ vô cùng! 🌹"
+            salutation: "Kính gửi Bà Ngoại thương yêu của cháu,",
+            poem: `Ngàn dặm đường xa dạ chẳng xa,\nTình thương Ngoại gửi ấm muôn nhà.\nTháng Mười kính chúc Bà Ngoại khỏe,\nPhúc lộc tràn trề tựa đóa hoa!`,
+            body: `Nhân ngày 20/10, cháu kính chúc Bà Ngoại thân yêu có một ngày lễ thật vui vẻ và đong đầy tình cảm! Cháu nhớ mãi những lần về quê được Bà Ngoại ôm vào lòng, cho những thức quà ngon, dạy bảo từng điều lễ phép nhỏ nhất.\n\nCháu chỉ mong sao Bà Ngoại luôn mạnh khỏe, tinh thần an lạc, lúc nào cũng tươi cười sum vầy cùng con cháu mỗi dịp tết đến xuân về. Chúng cháu yêu Bà Ngoại nhiều lắm ạ!`,
+            closing: "Cháu của Bà Ngoại thương nhớ và kính yêu! 🌹"
         },
         wishesList: [
-            "Chúc Mẹ yêu của con một ngày 20/10 thật nhiều niềm vui và hạnh phúc! Cảm ơn Mẹ vì đã luôn là chỗ dựa bình yên nhất, là ngọn hải đăng soi sáng cho con mỗi khi mỏi mệt.",
-            "Nhân ngày Phụ nữ Việt Nam, con chúc Mẹ luôn dồi dào sức khỏe, trẻ mãi không già, lúc nào cũng cười tươi như hoa và vạn sự như ý. Mẹ là người phụ nữ tuyệt vời nhất của con!",
-            "Mẹ ơi, hôm nay Mẹ hãy nghỉ ngơi thật thoải mái nhé, việc nhà đã có chúng con lo! Chúc Mẹ ngày 20/10 ngập tràn hoa, quà và tình yêu thương của bố và chúng con!",
-            "Gửi đến người phụ nữ đảm đang và dịu hiền nhất thế giới: Chúc Mẹ một ngày 20/10 ngập tràn niềm vui, 364 ngày còn lại đều bình an và luôn tự hào về chúng con!"
+            "Con kính chúc Bà Ngoại ngày Phụ nữ Việt Nam 20/10 thật nhiều sức khỏe, bình an, vạn sự như ý bên con cháu!",
+            "Chúc Bà Ngoại của cháu luôn khỏe mạnh, dẻo dai, mỗi ngày đều tràn ngập niềm vui và tiếng cười rộn rã!",
+            "Nhân ngày 20/10, chúng cháu gửi ngàn cái ôm ấm áp về với Bà Ngoại. Mong Ngoại luôn an vui, thọ trường!",
+            "Kính chúc Bà Ngoại luôn luôn tươi trẻ, thân tâm an lạc, ăn ngủ điều độ và mãi là bến đỗ yêu thương của con cháu!"
         ],
-        fireworkMessage: "Mẹ Yêu Luôn Trẻ Đẹp, Hạnh Phúc & Bình An!",
+        fireworkMessage: "Kính Chúc Bà Ngoại Sống Lâu Trăm Tuổi - Hạnh Phúc Vẹn Toàn!",
+        palette: ['#f59e0b', '#fbbf24', '#fde68a', '#ffffff']
+    },
+    metham: {
+        role: "Mẹ Thắm Tuyệt Vời",
+        title: "Kính Chúc Mẹ Thắm - Vầng Thái Dương Ấm Áp Đời Con",
+        avatar: "👩‍🦰",
+        badge: "Mẹ Thắm Yêu Dấu 👑",
+        shortDesc: "Cả đời vì con mà không quản nhọc nhằn, vòng tay Mẹ Thắm là chốn về bình yên nhất.",
+        letter: {
+            salutation: "Mẹ Thắm yêu dấu của con,",
+            poem: `Đi khắp thế gian không ai tốt bằng Mẹ,\nGánh nặng cuộc đời không ai khổ bằng Cha.\nMẹ Thắm một đời lo toan vất vả,\nCon nguyện khắc ghi mãi công ơn Người!`,
+            body: `Mẹ Thắm ơi, hôm nay là ngày 20/10 - ngày tôn vinh những người phụ nữ tuyệt vời, và trong lòng con, Mẹ Thắm luôn là người phụ nữ đẹp nhất, vĩ đại và bao dung nhất trên trần đời!\n\nCon cảm ơn Mẹ Thắm vì bao năm tháng nhọc nhằn đã chăm sóc, yêu thương con vô điều kiện. Cảm ơn những bữa cơm ngon mẹ nấu, những lời dặn dò ân cần mỗi khi con bước ra ngoài xã hội. Mẹ Thắm đã hy sinh thanh xuân, ước mơ riêng để lo cho con có được ngày hôm nay.\n\nNhân ngày 20/10, con chúc Mẹ Thắm luôn dồi dào sức khỏe, trẻ mãi không già, mỗi ngày trôi qua đều nhẹ nhõm, hạnh phúc và ngập tràn niềm vui tự hào về chúng con!`,
+            closing: "Con yêu Mẹ Thắm nhiều hơn tất cả mọi điều trên đời! Yêu Mẹ Thắm vô cùng! 🌹"
+        },
+        wishesList: [
+            "Chúc Mẹ Thắm một ngày 20/10 thật nhiều niềm vui, rực rỡ và hạnh phúc! Cảm ơn Mẹ Thắm vì đã luôn là chỗ dựa bình yên nhất của con.",
+            "Nhân ngày Phụ nữ Việt Nam, con chúc Mẹ Thắm dồi dào sức khỏe, trẻ mãi với thời gian, lúc nào cũng cười tươi như hoa!",
+            "Mẹ Thắm ơi, hôm nay Mẹ Thắm hãy nghỉ ngơi thật thoải mái nhé, việc nhà đã có chúng con lo! Chúc Mẹ Thắm nhận được cả rừng hoa và quà!",
+            "Gửi đến Mẹ Thắm - người phụ nữ tuyệt vời nhất quả đất: Chúc Mẹ Thắm 20/10 hạnh phúc ngập tràn, 364 ngày còn lại an yên và tràn đầy tiếng cười!"
+        ],
+        fireworkMessage: "Mẹ Thắm Mãi Trẻ Đẹp, Hạnh Phúc & Tràn Đầy Sức Khỏe!",
         palette: ['#ff0844', '#ff4b72', '#ff758c', '#ffffff']
     },
-    emgai: {
-        role: "Em Gái Đáng Yêu",
-        title: "Chúc Em Gái - Bông Hoa Tươi Thắm Rạng Rỡ",
+    hanbo: {
+        role: "Em Hân Bò",
+        title: "Chúc Em Hân Bò - Bông Hoa Nhí Nhảnh & Rực Rỡ",
         avatar: "👧",
-        badge: "Rực Rỡ & Năng Động",
-        shortDesc: "Luôn vui tươi, hồn nhiên và mang lại ngập tràn tiếng cười cho gia đình.",
-        envelopeColor: "#ec4899",
+        badge: "Em Hân Bò Đáng Yêu",
+        shortDesc: "Cô em gái siêu lém lỉnh, mang lại ngập tràn tiếng cười và năng lượng tích cực.",
         letter: {
-            salutation: "Gửi cô em gái nhỏ đáng yêu của anh/chị,",
-            poem: `Mùa hoa nở rộ đón ngày vui,\nEm gái tươi xinh rạng rỡ cười.\nHọc giỏi, may mắn và hạnh phúc,\nTương lai rộng mở sáng muôn nơi!`,
-            body: `Chúc mừng ngày 20/10 tới cô em gái siêu nhí nhảnh và dễ thương của nhà mình!\n\nChúc em bước sang ngày lễ của phái đẹp với thật nhiều niềm vui, lúc nào cũng rạng ngời như hoa mùa xuân, luôn tự tin theo đuổi những ước mơ và đam mê của bản thân. Dù đôi lúc có hay chí chóe, cãi vặt nhưng em vẫn mãi là đứa em bé bỏng mà cả nhà hết lòng cưng chiều và bảo vệ.\n\nChúc em học thật giỏi, thi cử luôn đạt kết quả cao, công việc thăng tiến thuận lợi và sớm có người yêu thương chiều chuộng em như gia đình mình nhé!`,
-            closing: "Cả nhà luôn ở bên cạnh và ủng hộ em hết mình! Chúc mừng 20/10! 🎉"
+            salutation: "Gửi cô em Hân Bò siêu quậy của anh/chị,",
+            poem: `20 tháng 10 rộn rã vui,\nHân Bò xinh xắn rạng ngời cười.\nĂn nhiều không béo, thi toàn đỗ,\nMay mắn ngập tràn, sáng muôn nơi!`,
+            body: `Chúc mừng ngày Phụ nữ Việt Nam 20/10 tới cô em Hân Bò siêu cấp dễ thương và nhí nhảnh của nhà mình!\n\nChúc Hân Bò ngày càng xinh xắn, duyên dáng, bớt lì một chút xíu, học thật giỏi, thi cử đạt điểm cao chót vót và đạt được mọi nguyện vọng của bản thân nhé. Dù ngày thường có hay cãi nhau chí chóe nhưng lúc nào anh/chị và cả nhà cũng hết mực cưng chiều và yêu thương Hân Bò.\n\nChúc Hân Bò ngày 20/10 nhận được cả núi quà, trà sữa uống mệt nghỉ và luôn vui tươi rạng rỡ nha!`,
+            closing: "Cả nhà luôn yêu thương và ủng hộ Hân Bò hết mình! Chúc mừng 20/10 Hân Bò! 🎉"
         },
         wishesList: [
-            "Chúc em gái 20/10 nhận được cả núi quà, ngày càng xinh gái, duyên dáng và học giỏi/thành công nhé! Nhớ chia bớt kẹo và quà cho anh/chị đấy!",
-            "Happy Vietnamese Women's Day em gái bé bỏng! Chúc em luôn giữ được nụ cười tỏa nắng, nhiều năng lượng tích cực và đạt được mọi mục tiêu trong tương lai!",
-            "Chúc cô công chúa của cả nhà một ngày 20/10 thật rực rỡ, ngày càng trưởng thành, tự tin, thông minh và gặp thật nhiều may mắn trên con đường phía trước!",
-            "20/10 chúc em gái: Ăn nhiều không béo, nhan sắc thăng hoa, tiền tài rủng rỉnh, thi đâu đỗ đó và luôn là cô bé đáng yêu nhất trần đời!"
+            "Chúc em Hân Bò 20/10 nhận được cả núi quà, ngày càng xinh gái, học giỏi, thi đâu đỗ đó nhé! Nhớ chia bớt quà cho anh/chị đấy!",
+            "Happy 20/10 cô em Hân Bò! Chúc Hân Bò luôn giữ nụ cười tỏa nắng, ăn nhiều không béo, da trắng dáng xinh và luôn yêu đời!",
+            "Chúc Hân Bò một ngày 20/10 thật rực rỡ, tự tin, thông minh và gặt hái thật nhiều thành công trên con đường sắp tới!",
+            "20/10 chúc Hân Bò: Tiền đầy túi, tình đầy tim, bớt nhõng nhẽo và luôn là cô bé đáng yêu nhất của cả nhà!"
         ],
-        fireworkMessage: "Chúc Em Gái Luôn Xinh Đẹp, Tươi Vui & Thành Công!",
-        palette: ['#c471ed', '#f64f59', '#12c2e9', '#fad0c4']
+        fireworkMessage: "Chúc Em Hân Bò Xinh Đẹp, Học Giỏi & Rạng Rỡ!",
+        palette: ['#ec4899', '#f472b6', '#fbcfe8', '#ffffff']
+    },
+    hoa: {
+        role: "Em Hoa Dịu Dàng",
+        title: "Chúc Em Hoa - Đóa Hoa Tươi Thắm & Duyên Dáng",
+        avatar: "🌸",
+        badge: "Em Hoa Dễ Thương",
+        shortDesc: "Dịu dàng, đáng yêu và ngát hương thơm như chính cái tên của em.",
+        letter: {
+            salutation: "Gửi em Hoa dịu dàng và đáng yêu của anh/chị,",
+            poem: `Đóa hoa xinh xắn ngát hương bay,\nChúc em ngày hội rộn vui say.\nHạnh phúc, an nhiên, đời rạng rỡ,\nTương lai tươi sáng nở từng ngày!`,
+            body: `Chúc mừng ngày 20/10 tới em Hoa thân yêu của gia đình mình!\n\nChúc Hoa một ngày lễ ngập tràn hoa tươi, lời chúc ngọt ngào và những món quà xinh xắn nhất. Chúc em luôn giữ được nét dịu dàng, nụ cười trong trẻo, tinh thần lạc quan và ngày càng trưởng thành, tự tin bước đi trên con đường mình đã chọn.\n\nChúc em học tập thật tốt, công việc hanh thông, luôn được mọi người yêu thương quý mến và gặp thật nhiều may mắn trong cuộc sống nhé!`,
+            closing: "Chúc em Hoa ngày 20/10 thật hạnh phúc và trọn vẹn niềm vui! 💐"
+        },
+        wishesList: [
+            "Chúc em Hoa ngày 20/10 thật nhiều niềm vui, luôn tươi tắn và ngát hương như chính đóa hoa xinh đẹp!",
+            "Happy Vietnamese Women's Day em Hoa! Chúc em luôn tự tin, duyên dáng, học tập thật tốt và đạt mọi điều ước!",
+            "Chúc em Hoa một ngày 20/10 rực rỡ ngập tràn tiếng cười, luôn được yêu chiều và hạnh phúc mỗi ngày!",
+            "20/10 chúc em Hoa ngày càng xinh đẹp, thành công trong mọi dự định và luôn là niềm tự hào của gia đình!"
+        ],
+        fireworkMessage: "Chúc Em Hoa Luôn Tươi Tắn, Dịu Dàng & Thành Công!",
+        palette: ['#c471ed', '#12c2e9', '#f64f59', '#ffffff']
     }
 };
 
@@ -97,37 +136,55 @@ const FORTUNES = [
 let localWishesFallback = [
     {
         id: 1,
-        recipient_role: "Bà",
+        recipient_role: "Bà Nội",
         recipient_name: "Bà Nội kính yêu",
         sender_name: "Cháu Hoàng",
-        message: "Nhân ngày 20/10, cháu kính chúc Bà luôn mạnh khỏe, sống lâu trăm tuổi, bình an bên con cháu. Cảm ơn những câu chuyện cổ tích và tình thương bao la của Bà!",
-        likes: 18,
+        message: "Nhân ngày 20/10, cháu kính chúc Bà Nội luôn mạnh khỏe, sống lâu trăm tuổi, bình an bên con cháu. Cảm ơn những câu chuyện cổ tích và tình thương bao la của Bà Nội!",
+        likes: 28,
         created_at: new Date(Date.now() - 3600000 * 5).toISOString()
     },
     {
         id: 2,
-        recipient_role: "Mẹ",
-        recipient_name: "Mẹ Lan thương yêu",
-        sender_name: "Con trai út",
-        message: "Chúc Mẹ yêu của con một ngày 20/10 ngập tràn nụ cười và niềm vui! Cả đời mẹ đã vất vả vì chúng con, con chỉ mong mẹ luôn an yên, trẻ đẹp và tự hào về con!",
-        likes: 42,
-        created_at: new Date(Date.now() - 3600000 * 3).toISOString()
+        recipient_role: "Bà Ngoại",
+        recipient_name: "Bà Ngoại thương yêu",
+        sender_name: "Cháu Hoàng",
+        message: "Kính chúc Bà Ngoại ngày 20/10 ngập tràn niềm vui, sức khỏe dồi dào, vạn sự như ý và bách niên giai lão!",
+        likes: 25,
+        created_at: new Date(Date.now() - 3600000 * 4).toISOString()
     },
     {
         id: 3,
-        recipient_role: "Em gái",
-        recipient_name: "Bé Bống dễ thương",
+        recipient_role: "Mẹ Thắm",
+        recipient_name: "Mẹ Thắm yêu dấu",
+        sender_name: "Con yêu",
+        message: "Chúc Mẹ Thắm một ngày 20/10 ngập tràn nụ cười và hạnh phúc! Cả đời mẹ đã vất vả vì chúng con, con chỉ mong Mẹ Thắm luôn an yên, trẻ đẹp và tự hào về con!",
+        likes: 68,
+        created_at: new Date(Date.now() - 3600000 * 3).toISOString()
+    },
+    {
+        id: 4,
+        recipient_role: "Hân Bò",
+        recipient_name: "Em Hân Bò",
         sender_name: "Anh hai",
-        message: "Chúc em gái 20/10 xinh xắn, rạng rỡ, học giỏi, thi đâu đỗ đó và sớm đạt được mọi ước mơ nhé! Quà của anh gửi về sau nha!",
-        likes: 29,
+        message: "Chúc em Hân Bò 20/10 nhận được cả núi quà, ngày càng xinh xắn, bớt lì, thi đâu đỗ đó và luôn tươi cười nhé!",
+        likes: 39,
+        created_at: new Date(Date.now() - 3600000 * 2).toISOString()
+    },
+    {
+        id: 5,
+        recipient_role: "Hoa",
+        recipient_name: "Em Hoa",
+        sender_name: "Anh hai",
+        message: "Chúc em Hoa ngày 20/10 thật nhiều niềm vui, luôn tươi tắn dịu dàng như hoa, học giỏi và gặp nhiều may mắn!",
+        likes: 36,
         created_at: new Date(Date.now() - 3600000 * 1).toISOString()
     }
 ];
 
 class App {
     constructor() {
-        this.currentRecipient = 'me';
-        this.selectedFlowers = ['rose', 'rose', 'carnation']; // default bouquet
+        this.currentRecipient = 'metham';
+        this.selectedFlowers = ['rose', 'rose', 'carnation'];
         this.openedGifts = new Set();
         this.currentWallRole = 'all';
         this.backendAvailable = false;
@@ -139,7 +196,6 @@ class App {
     }
 
     initDOM() {
-        // Elements
         this.musicToggleBtn = document.getElementById('music-toggle-btn');
         this.musicStatusText = document.getElementById('music-status-text');
         this.musicWave = document.getElementById('music-wave');
@@ -150,7 +206,6 @@ class App {
         this.toastMsg = document.getElementById('toast-message');
         this.backendBadge = document.getElementById('backend-status-badge');
 
-        // Setup sections
         this.setupPersonaCards();
         this.setupBouquetBuilder();
         this.setupFortuneBoxes();
@@ -164,7 +219,7 @@ class App {
             const isPlaying = window.soundEngine.toggleMusic((active) => {
                 this.updateMusicUI(active);
             });
-            this.showToast(isPlaying ? "🎵 Đang bật giai điệu êm dịu 20/10" : "🔇 Đã tắt âm thanh");
+            this.showToast(isPlaying ? "🎵 Đang phát bài hát về Mẹ" : "🔇 Đã tạm dừng nhạc");
         });
 
         // Fullscreen Fireworks Show
@@ -348,18 +403,20 @@ class App {
             grid.innerHTML = `
                 <div class="col-span-full py-12 text-center text-rose-200/50">
                     <p class="text-3xl mb-2">💌</p>
-                    <p class="text-sm">Chưa có lời chúc nào trong mục này. Hãy là người đầu tiên gửi trao yêu thương nhé!</p>
+                    <p class="text-sm">Chưa có lời chúc nào trong mục này. Hãy gửi trao yêu thương nhé!</p>
                 </div>
             `;
             return;
         }
 
         wishes.forEach(w => {
-            const roleBadgeColor = w.recipient_role === 'Bà' 
+            const isGrandma = w.recipient_role.includes('Bà');
+            const isMom = w.recipient_role.includes('Mẹ');
+            const roleBadgeColor = isGrandma
                 ? 'bg-amber-500/20 text-amber-300 border-amber-400/30' 
-                : (w.recipient_role === 'Mẹ' ? 'bg-rose-500/20 text-rose-300 border-rose-400/30' : 'bg-pink-500/20 text-pink-300 border-pink-400/30');
+                : (isMom ? 'bg-rose-500/20 text-rose-300 border-rose-400/30' : 'bg-pink-500/20 text-pink-300 border-pink-400/30');
 
-            const roleIcon = w.recipient_role === 'Bà' ? '👵' : (w.recipient_role === 'Mẹ' ? '👩‍🦰' : '👧');
+            const roleIcon = isGrandma ? '👵' : (isMom ? '👩‍🦰' : '👧');
             const timeAgo = this.formatTimeAgo(w.created_at);
 
             const card = document.createElement('div');
@@ -406,9 +463,8 @@ class App {
         buttonEl.classList.add('scale-110', 'bg-rose-600', 'text-white');
         setTimeout(() => buttonEl.classList.remove('scale-110'), 250);
 
-        // Particle sparkle at button location
         const rect = buttonEl.getBoundingClientRect();
-        window.particleCanvas.spawnClickSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        window.particleCanvas.spawnCanvasSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2);
 
         if (this.backendAvailable) {
             try {
@@ -420,7 +476,7 @@ class App {
             if (item) item.likes = (item.likes || 0) + 1;
         }
 
-        this.showToast("💖 Cảm ơn bạn đã thả tim cho lời chúc!");
+        this.showToast("💖 Đã thả tim cho lời chúc!");
     }
 
     async submitWishToBackend() {
@@ -441,7 +497,7 @@ class App {
         const payload = {
             recipient_role: role,
             recipient_name: recipient,
-            sender_name: sender || "Người gửi ẩn danh",
+            sender_name: sender || "Người gửi yêu thương",
             message: message
         };
 
@@ -454,8 +510,8 @@ class App {
                 });
                 if (res.ok) {
                     const newWish = await res.json();
-                    this.showToast("✨ Lời chúc của bạn đã được lưu vào hệ thống!");
-                    window.particleCanvas.launchSpecialTribute(role, `Lời Chúc Tặng ${recipient} Đã Gửi Thành Công!`, ['#ff4b72', '#ffd700', '#12c2e9']);
+                    this.showToast("✨ Lời chúc đã được lưu vào hệ thống!");
+                    window.particleCanvas.launchSpecialTribute(role, `Lời Chúc Tới ${recipient} Đã Được Lưu!`, ['#ff4b72', '#ffd700', '#12c2e9']);
                     this.loadWallWishes();
                     this.loadBackendStats();
                     return;
@@ -472,7 +528,7 @@ class App {
         };
         localWishesFallback.unshift(offlineWish);
         this.renderWallCards(localWishesFallback);
-        window.particleCanvas.launchSpecialTribute(role, `Lời Chúc Tặng ${recipient} Đã Được Tạo!`, ['#ff4b72', '#ffd700']);
+        window.particleCanvas.launchSpecialTribute(role, `Lời Chúc Tới ${recipient} Đã Được Tạo!`, ['#ff4b72', '#ffd700']);
         this.showToast("✨ Lời chúc đã được thêm lên bức tường!");
     }
 
@@ -488,10 +544,11 @@ class App {
         return `${Math.floor(diffHours / 24)} ngày trước`;
     }
 
-    // ----------------- Persona Cards -----------------
+    // ----------------- Persona Cards Setup -----------------
     setupPersonaCards() {
-        ['ba', 'me', 'emgai'].forEach(key => {
+        ['banoi', 'bangoai', 'metham', 'hanbo', 'hoa'].forEach(key => {
             const data = WISHES_DATA[key];
+            if (!data) return;
 
             // Open letter button
             const openLetterBtn = document.getElementById(`btn-open-letter-${key}`);
@@ -507,7 +564,7 @@ class App {
                 tributeBtn.addEventListener('click', () => {
                     window.particleCanvas.launchSpecialTribute(data.role, data.fireworkMessage, data.palette);
                     this.triggerStatIncrement('total_fireworks');
-                    this.showToast(`✨ Bắn pháo hoa kính dâng ${data.role}!`);
+                    this.showToast(`✨ Bắn pháo hoa kính chúc ${data.role}!`);
                 });
             }
 
@@ -517,13 +574,13 @@ class App {
                 wishesContainer.innerHTML = '';
                 data.wishesList.forEach((wish, idx) => {
                     const wishItem = document.createElement('div');
-                    wishItem.className = 'wish-item p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-rose-400/50 hover:bg-white/10 transition-all flex items-start justify-between gap-3 text-sm leading-relaxed';
+                    wishItem.className = 'wish-item p-3 rounded-xl bg-white/5 border border-white/10 hover:border-rose-400/50 hover:bg-white/10 transition-all flex items-start justify-between gap-2.5 text-xs sm:text-sm leading-relaxed';
                     wishItem.innerHTML = `
                         <div class="flex-1 text-rose-100">
-                            <span class="inline-block text-rose-400 font-semibold mr-1.5">#${idx + 1}</span> ${wish}
+                            <span class="inline-block text-rose-400 font-semibold mr-1">#${idx + 1}</span> ${wish}
                         </div>
-                        <button class="copy-wish-btn shrink-0 px-2.5 py-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/40 text-rose-200 hover:text-white transition-all text-xs flex items-center gap-1 active:scale-95" title="Sao chép lời chúc">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                        <button class="copy-wish-btn shrink-0 px-2 py-1 rounded-lg bg-rose-500/20 hover:bg-rose-500/40 text-rose-200 hover:text-white transition-all text-xs flex items-center gap-1 active:scale-95" title="Sao chép lời chúc">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                             <span>Chép</span>
                         </button>
                     `;
@@ -552,7 +609,6 @@ class App {
         this.currentRecipient = recipientKey;
         this.renderEnvelopeContent();
 
-        // Reset envelope state
         this.envelopeWrapper.classList.remove('is-open');
         this.envelopeModal.classList.remove('hidden');
         this.envelopeModal.classList.add('flex');
@@ -570,6 +626,7 @@ class App {
 
     renderEnvelopeContent() {
         const data = WISHES_DATA[this.currentRecipient];
+        if (!data) return;
 
         // Highlight tab
         document.querySelectorAll('.modal-recipient-tab').forEach(tab => {
@@ -612,12 +669,12 @@ class App {
 
         FLOWERS.forEach(flower => {
             const btn = document.createElement('button');
-            btn.className = 'flower-btn flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-rose-400 hover:bg-rose-500/20 text-left transition-all active:scale-95';
+            btn.className = 'flower-btn flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 hover:border-rose-400 hover:bg-rose-500/20 text-left transition-all active:scale-95';
             btn.innerHTML = `
                 <span class="text-2xl">${flower.icon}</span>
                 <div>
-                    <div class="font-medium text-sm text-white">${flower.name}</div>
-                    <div class="text-[11px] text-rose-200/70">${flower.meaning}</div>
+                    <div class="font-medium text-xs sm:text-sm text-white">${flower.name}</div>
+                    <div class="text-[10px] sm:text-[11px] text-rose-200/70">${flower.meaning}</div>
                 </div>
             `;
             btn.addEventListener('click', () => {
@@ -626,14 +683,12 @@ class App {
             flowerOptionsContainer.appendChild(btn);
         });
 
-        // Clear bouquet
         document.getElementById('btn-clear-bouquet').addEventListener('click', () => {
             this.selectedFlowers = [];
             this.renderBouquet();
             this.showToast("Đã làm mới bó hoa");
         });
 
-        // Gift bouquet button
         document.getElementById('btn-gift-bouquet').addEventListener('click', () => {
             if (this.selectedFlowers.length === 0) {
                 this.showToast("Hãy chọn ít nhất 1 bông hoa cho bó hoa của bạn nhé! 🌸");
@@ -667,17 +722,15 @@ class App {
 
         countText.innerText = `${this.selectedFlowers.length} đóa hoa`;
 
-        // Render graphical representation
         display.innerHTML = '';
         if (this.selectedFlowers.length === 0) {
-            display.innerHTML = `<div class="text-rose-200/50 text-sm py-8 text-center italic">Chưa có bông hoa nào. Nhấn vào các loại hoa bên cạnh để thêm vào bó!</div>`;
+            display.innerHTML = `<div class="text-rose-200/50 text-xs sm:text-sm py-8 text-center italic">Chưa có bông hoa nào. Nhấn vào các loại hoa bên cạnh để thêm vào bó!</div>`;
             meaningList.innerHTML = `<span class="text-xs text-rose-200/50">Chọn hoa để xem ý nghĩa kết hợp</span>`;
             return;
         }
 
-        // Layout flowers in an artistic fan-out bouquet
         const total = this.selectedFlowers.length;
-        const radius = 65;
+        const radius = 60;
         this.selectedFlowers.forEach((fid, idx) => {
             const fInfo = FLOWERS.find(f => f.id === fid) || FLOWERS[0];
             const angle = -70 + (140 / Math.max(1, total - 1)) * idx;
@@ -692,7 +745,6 @@ class App {
             display.appendChild(flEl);
         });
 
-        // Summary of unique meanings
         const uniqueFids = [...new Set(this.selectedFlowers)];
         meaningList.innerHTML = '';
         uniqueFids.forEach(fid => {
@@ -710,18 +762,18 @@ class App {
 
         FORTUNES.forEach((fortune, idx) => {
             const box = document.createElement('div');
-            box.className = 'fortune-box group cursor-pointer p-5 rounded-2xl bg-gradient-to-br from-rose-950/40 via-purple-950/30 to-pink-950/40 border border-white/10 hover:border-rose-400/60 transition-all duration-300 relative overflow-hidden flex flex-col items-center justify-center text-center min-h-[170px] shadow-lg hover:shadow-rose-500/20';
+            box.className = 'fortune-box group cursor-pointer p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-rose-950/40 via-purple-950/30 to-pink-950/40 border border-white/10 hover:border-rose-400/60 transition-all duration-300 relative overflow-hidden flex flex-col items-center justify-center text-center min-h-[160px] shadow-lg hover:shadow-rose-500/20';
             
             box.innerHTML = `
                 <div class="box-closed-state flex flex-col items-center gap-2 transition-transform group-hover:scale-105">
                     <div class="text-4xl animate-bounce-slow">🎁</div>
-                    <div class="text-rose-200 font-semibold text-sm">Hộp Quà May Mắn #${idx + 1}</div>
-                    <div class="text-xs text-rose-300/60">Nhấp để mở quẻ 20/10</div>
+                    <div class="text-rose-200 font-semibold text-xs sm:text-sm">Hộp Quà May Mắn #${idx + 1}</div>
+                    <div class="text-[11px] text-rose-300/60">Nhấp để mở quẻ 20/10</div>
                 </div>
                 <div class="box-opened-state hidden flex-col items-center gap-2 animate-scale-up">
                     <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/30 text-amber-300 font-bold border border-amber-400/40">${fortune.title}</span>
-                    <p class="text-sm text-white font-medium leading-snug px-2">"${fortune.text}"</p>
-                    <span class="text-xs text-rose-300 font-serif italic mt-1">✨ ${fortune.charm}</span>
+                    <p class="text-xs sm:text-sm text-white font-medium leading-snug px-2">"${fortune.text}"</p>
+                    <span class="text-[11px] text-rose-300 font-serif italic mt-1">✨ ${fortune.charm}</span>
                 </div>
             `;
 
@@ -735,9 +787,8 @@ class App {
                 opened.classList.add('flex');
                 box.classList.add('ring-2', 'ring-rose-400', 'bg-rose-900/40');
 
-                // Burst particles
                 const rect = box.getBoundingClientRect();
-                window.particleCanvas.spawnClickSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2);
+                window.particleCanvas.spawnCanvasSparkles(rect.left + rect.width / 2, rect.top + rect.height / 2);
                 this.triggerStatIncrement('total_hearts');
 
                 if (window.soundEngine) {
@@ -763,27 +814,46 @@ class App {
 
         const updatePreview = () => {
             const role = selectRole.value;
-            const recipient = inputRecipient.value.trim() || (role === 'Bà' ? 'Bà kính yêu' : role === 'Mẹ' ? 'Mẹ thương yêu' : 'Em gái nhỏ');
+            const recipient = inputRecipient.value.trim() || `Người ${role} yêu thương`;
             const sender = inputSender.value.trim() || 'Người gửi trao yêu thương';
-            const message = inputMessage.value.trim() || 'Chúc người phụ nữ tuyệt vời một ngày 20/10 ngập tràn niềm vui, sức khỏe dồi dào, luôn tươi trẻ, bình an và hạnh phúc trọn vẹn bên những người thân thương!';
+            const message = inputMessage.value.trim() || 'Chúc một ngày 20/10 ngập tràn niềm vui, sức khỏe dồi dào, luôn tươi trẻ, bình an và hạnh phúc trọn vẹn bên những người thân thương!';
 
             cardPreviewRecipient.innerText = `Kính gửi: ${recipient}`;
-            cardPreviewRole.innerText = `Dành tặng người ${role} tuyệt vời`;
+            cardPreviewRole.innerText = `Dành tặng ${role} tuyệt vời`;
             cardPreviewMessage.innerText = message;
             cardPreviewSender.innerText = `Ký tên: ${sender}`;
         };
+
+        selectRole.addEventListener('change', () => {
+            const role = selectRole.value;
+            if (role === 'Bà Nội') {
+                inputRecipient.value = 'Bà Nội kính yêu';
+                inputMessage.value = 'Kính chúc Bà Nội luôn dồi dào sức khỏe, sống lâu trăm tuổi, bách niên giai lão và bình an bên con cháu!';
+            } else if (role === 'Bà Ngoại') {
+                inputRecipient.value = 'Bà Ngoại thương yêu';
+                inputMessage.value = 'Chúc Bà Ngoại ngày 20/10 ngập tràn niềm vui, thọ tỷ Nam Sơn, nụ cười hiền từ lúc nào cũng rạng rỡ!';
+            } else if (role === 'Mẹ Thắm') {
+                inputRecipient.value = 'Mẹ Thắm yêu dấu';
+                inputMessage.value = 'Chúc Mẹ Thắm 20/10 ngập tràn niềm vui, trẻ mãi không già, luôn hạnh phúc và tự hào về chúng con!';
+            } else if (role === 'Hân Bò') {
+                inputRecipient.value = 'Em Hân Bò';
+                inputMessage.value = 'Chúc Hân Bò 20/10 nhận được cả núi quà, ngày càng xinh gái, bớt lì, học giỏi và luôn vui vẻ!';
+            } else if (role === 'Hoa') {
+                inputRecipient.value = 'Em Hoa';
+                inputMessage.value = 'Chúc em Hoa ngày 20/10 thật nhiều niềm vui, luôn tươi tắn dịu dàng như hoa và thành công rực rỡ!';
+            }
+            updatePreview();
+        });
 
         [inputSender, inputRecipient, selectRole, inputMessage].forEach(el => {
             el.addEventListener('input', updatePreview);
         });
 
-        // Copy custom card
         document.getElementById('btn-copy-custom-card').addEventListener('click', () => {
             const text = `${cardPreviewRecipient.innerText}\n\n${cardPreviewMessage.innerText}\n\n${cardPreviewSender.innerText}`;
             this.copyToClipboard(text, "💌 Đã sao chép nội dung thiệp chúc mừng!");
         });
 
-        // Firework for custom card
         document.getElementById('btn-firework-custom-card').addEventListener('click', () => {
             const role = selectRole.value;
             window.particleCanvas.launchSpecialTribute(role, `Chúc Mừng 20/10: ${cardPreviewRecipient.innerText}!`, ['#ff4b72', '#ffd700', '#12c2e9']);
